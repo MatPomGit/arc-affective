@@ -1,0 +1,37 @@
+# Sensitive recordings and licensed benchmark corpora
+data/**
+!data/.gitkeep
+*.edf
+*.bdf
+*.fif
+*.set
+*.vhdr
+*.eeg
+*.mat
+*.mp4
+*.avi
+*.mov
+*.npy
+*.npz
+*.parquet
+*.pkl
+*.pickle
+*.db
+*.sqlite
+*.sqlite3
+*.muse
+*.csv
+*.tsv
+# Generated artifacts
+results/
+runs/
+reports/generated/
+*.egg-info/
+__pycache__/
+.pytest_cache/
+.venv/
+venv/
+.env
+.env.*
+*.key
+*.pem
