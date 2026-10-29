@@ -20,4 +20,3 @@ Each track is mapped to AEEiTK, ITiT or informatics in [the discipline map](disc
 **Foundational dependency path:** P08 event/benchmark infrastructure and P01/P04 public-data methods first; P02 thereafter; P03/P05 with devices; P06/P07 on top of tested inference and fallbacks. Publication order can differ from implementation order.
 
 **Human participant ceiling:** own prospective experimental sessions N <= 3 university staff; publicly released datasets may have larger historical cohorts. Do not pool public datasets and own N=1 into unqualified population claims.
-**Active issue-level execution plan:** [publication milestone index](publication-milestones.md) and [cross-project dependencies](research-dependencies.md). Each paper's epic is authoritative for M0–M6 status; stage checkboxes are manual. The plan must not be mistaken for empirical evidence.

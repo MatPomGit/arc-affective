@@ -1,0 +1,4 @@
+# Pinned for reproducible GitHub Pages builds. Keep on security releases.
+# MkDocs Material 9.8.0 is in upstream maintenance mode; review migration before May 2027.
+mkdocs==1.6.1
+mkdocs-material==9.8.0
