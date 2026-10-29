@@ -1,5 +1,4 @@
 """Standard-library offline tests: python -m unittest discover -s tests -v."""
-import os
 from pathlib import Path
 import sys
 import tempfile
@@ -22,7 +21,6 @@ class EventTests(unittest.TestCase):
             {"synthetic": "yes"}, {"session_id": ""}
         ]:
             with self.subTest(overrides=overrides):
-                event = Event("s", "synthetic", "marker", 1, {}, **{k:v for k,v in overrides.items() if k not in {"session_id", "source", "t_monotonic_ns"}}) if False else None
                 fields = dict(session_id="s", source="synthetic", kind="marker", t_monotonic_ns=1, payload={})
                 fields.update(overrides)
                 with self.assertRaises(ValueError):
