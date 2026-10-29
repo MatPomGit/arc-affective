@@ -32,6 +32,22 @@ See [scientific-discipline mapping](docs/discipline-map.md), [portfolio and non-
 
 **Publication planning:** eight paper epics each have seven verified evidence-gates M0–M6 (56 canonical implementation issues). Current status is PLANNED, not 56 completed experiments. Native GitHub Milestones entities have not been set; stage tracking is done via linked issues.
 
+## Documentation — MkDocs / GitHub Pages
+
+The browsable research handbook is configured for [GitHub Pages](https://matpomgit.github.io/arc-affective/) (available after Pages is enabled and the deployment workflow succeeds). It includes all eight paper protocols, evidence gates M0–M6, diagrams, datasets, sensors and the complete issue register.
+
+**Local build (Python 3.11+):**
+
+```bash
+python -m pip install -r requirements-docs.txt
+python scripts/sync_mkdocs.py
+python -m unittest discover -s tests -p 'test_docs.py' -v
+mkdocs build --strict
+mkdocs serve
+```
+
+Sources for paper documentation remain in `papers/`; `docs/papers/` is a generated, ignored directory. Deployment uses [Docs / MkDocs](.github/workflows/docs.yml) on GitHub Actions (public-repository standard runner; no metered API). [Publishing instructions](docs/operations/pages.md).
+
 ## Project layout
 
 ```text

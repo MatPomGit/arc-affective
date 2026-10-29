@@ -11,3 +11,6 @@
 9. Keep README, papers, docs and issue acceptance criteria consistent. Version actual code/artifacts; preserve provenance. No untrusted code on persistent self-hosted runners.
 10. Follow [milestone index](docs/publication-milestones.md), [dependency graph](docs/research-dependencies.md), and [JRA operating procedure](docs/issue-operating-procedure.md). A parent issue checkbox is checked only on evidenced gate completion. Avoid duplicates; P01–P04 M2 canonical issues are #30–#33.
 11. Preserve zero-spend and explicit human-study/rights gates; an aspirational schedule is not an authorization to run collection or paid workloads.
+
+12. Documentation site: edit source Markdown in `docs/` and paper proposals only in `papers/`; `docs/papers/` and `site/` are generated and ignored. After any paper edit run `python scripts/sync_mkdocs.py`, `python -m unittest discover -s tests -p test_docs.py -v`, and `mkdocs build --strict` with `requirements-docs.txt`. Update `mkdocs.yml` nav when adding pages.
+13. GitHub Pages workflow runs on public standard GitHub-hosted runners for docs only, which GitHub documents as free for public repositories. Do not add paid services, sensor acquisition, private data or untrusted persistent runner execution to docs builds.
