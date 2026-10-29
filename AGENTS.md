@@ -9,3 +9,5 @@
 7. Maintain a hypothesis/protocol, reference baselines, sensitivity analysis, uncertainty, and pass/fail evidence gate for every manuscript. Distinguish task condition from measured mental state and avoid clinical claims.
 8. For robotics, use simulation first, separate intent estimation from safety supervision and require a deterministic abort/hold path.
 9. Keep README, papers, docs and issue acceptance criteria consistent. Version actual code/artifacts; preserve provenance. No untrusted code on persistent self-hosted runners.
+10. Follow [milestone index](docs/publication-milestones.md), [dependency graph](docs/research-dependencies.md), and [JRA operating procedure](docs/issue-operating-procedure.md). A parent issue checkbox is checked only on evidenced gate completion. Avoid duplicates; P01–P04 M2 canonical issues are #30–#33.
+11. Preserve zero-spend and explicit human-study/rights gates; an aspirational schedule is not an authorization to run collection or paid workloads.
