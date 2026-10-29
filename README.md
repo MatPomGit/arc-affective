@@ -2,7 +2,7 @@
 
 Engineering research programme on **affective and cognitive state monitoring**, uncertainty-aware multimodal sensing, adaptive games, human–computer interaction and safe robot control.
 
-**Scope:** computer science, automation, electronics, telecommunications, signal processing and machine learning (AEiT/ICT). Not clinical diagnosis, psychological test validation, medical monitoring or emotion mind-reading.
+**Scope:** Polish engineering/science disciplines AEEiTK (automation, electronics, electrical engineering and space technologies), ITiT (computer engineering and telecommunications), and informatics; signal processing, machine learning, control and embedded systems. Not clinical diagnosis, psychological test validation, medical monitoring or emotion mind-reading.
 
 ## Research constraints
 
@@ -26,7 +26,9 @@ Engineering research programme on **affective and cognitive state monitoring**, 
 | [P07](papers/P07-safe-hri.md) | Gaze/hand intent and fail-safe robot teleoperation | ROS 2/Gazebo simulated robot + N=1–3 |
 | [P08](papers/P08-edge-systems.md) | Real-time, fault-tolerant multimodal edge inference | Repeatable CPU/GPU device benchmarks, N=0–1 |
 
-See [portfolio and non-overlap rules](docs/portfolio.md), [architecture](docs/architecture.md), [hardware rights](docs/hardware.md), [dataset registry](docs/datasets.md), [experimental methods](docs/methodology.md), [privacy and ethics](docs/governance.md), and [execution order](docs/roadmap.md).
+See [scientific-discipline mapping](docs/discipline-map.md), [portfolio and non-overlap rules](docs/portfolio.md), [architecture](docs/architecture.md), [hardware rights](docs/hardware.md), [dataset registry](docs/datasets.md), [experimental methods](docs/methodology.md), [privacy and ethics](docs/governance.md), and [execution order](docs/roadmap.md).
+
+**Work tracking:** [P01](https://github.com/MatPomGit/arc-affective/issues/5) · [P02](https://github.com/MatPomGit/arc-affective/issues/6) · [P03](https://github.com/MatPomGit/arc-affective/issues/7) · [P04](https://github.com/MatPomGit/arc-affective/issues/8) · [P05](https://github.com/MatPomGit/arc-affective/issues/9) · [P06](https://github.com/MatPomGit/arc-affective/issues/10) · [P07](https://github.com/MatPomGit/arc-affective/issues/11) · [P08](https://github.com/MatPomGit/arc-affective/issues/12). Shared foundation: [hardware #1](https://github.com/MatPomGit/arc-affective/issues/1), [datasets #2](https://github.com/MatPomGit/arc-affective/issues/2), [platform #3](https://github.com/MatPomGit/arc-affective/issues/3), [governance #4](https://github.com/MatPomGit/arc-affective/issues/4).
 
 ## Project layout
 
