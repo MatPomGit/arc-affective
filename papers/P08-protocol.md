@@ -9,3 +9,7 @@
 **Acceptance and uncertainty:** log all ingress, invalid, dropped, evicted, processed and on-time counts; verify accounting identity. Report p50/p95/p99 end-to-end monotonic latency, deadline miss, goodput, queue occupancy, freshness, CPU/RSS, event counts, exact code version, host OS and seed. Use run-level paired differences and CIs, not per-frame independence. Do not call synthetic service sleeps neural inference.
 
 **Go/no-go:** software-only replay or simulation is engineering preparation, not real sensor latency evidence. No new scheduling novelty until compared with adaptive and deadline-aware approaches such as [Nigade et al. 2024](https://doi.org/10.1007/s11241-024-09418-4), [Sedlak et al. 2025](https://doi.org/10.1007/s12530-025-09753-2), and [Dynamic Batching / Early-Exiting 2024](https://doi.org/10.1109/VTC2024-Spring62846.2024.10682995). Keep blocked consumer gaze/EEG streams disabled; instrument legitimate metadata only.
+
+## Implemented E0 precursor (2026-10-30)
+
+The [synthetic replay source](https://github.com/MatPomGit/arc-affective/blob/main/src/arc_affective/p08_benchmark.py) and [P08 implementation evidence](https://github.com/MatPomGit/arc-affective/blob/main/reports/P08-data-qa.md) contain deterministic, virtual-time queue comparisons only. No measured p95/p99, physical node data or original scheduler performance is claimed. M2 #41 stays open until measured real-clock integration and repeatability evidence are available.
