@@ -39,3 +39,7 @@ The [source-pinned read-only preprocessing audit](https://github.com/MatPomGit/a
 ## Prospective montage subset QA (2026-10-30)
 
 The [name-level 2/4/8 montage review](https://github.com/MatPomGit/arc-affective/blob/main/reports/P01-montage-review-qa.md) can check proposed channel-label sets against two pinned BIDS cohort inventories without EEG data. **Shared names do not imply identical physical positions or reference.** Six cohort-dependent labels and particularly A1/A2 versus HEOR/HEOL require independent S2/S3 verification. No eligible montage or endpoint has been frozen.
+
+## Full NEMAR sidecar census (2026-10-30, metadata only)
+
+A [full 123/123 public text-metadata audit](https://github.com/MatPomGit/arc-affective/blob/main/reports/P01-faced-provenance-qa.md) of pinned upstream commit `2577b0bbc089b49e828cd98d80445133634b6d34` finds 55 recordings declared at 250 Hz and 68 at 1000 Hz. The same commit's README and converter narrative claim 31 at 250 Hz and 92 at 1000 Hz. This is a **documentation-versus-BIDS sampling-frequency discrepancy**, not verified signal corruption. All 123 derived JSON sidecars still specify manufacturer Biosemi and unknown EEG reference/ground. Do not train or pool on an assumed acquisition-rate grouping; original `Recording_info.csv`, BDF headers, source-to-BIDS unit/reference provenance and S2/S3 remain validation gates. M1 is **DRAFT**.

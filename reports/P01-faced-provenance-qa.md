@@ -72,3 +72,66 @@ python -m unittest discover -s tests -p test_p01_faced_provenance.py -v
 ```
 
 This work could not retrieve the original supplementary S2/S3 tables (including the linked DOCX) or `Electrode_Location.xlsx` through current public retrieval paths. Source anatomical mapping remains blocked.
+
+
+## Complete pinned NEMAR text-sidecar census (2026-10-30)
+
+**Scope:** direct, read-only inspection of the **123 `_eeg.json` and 123
+`_channels.tsv` files**, all at immutable upstream Git commit
+[`2577b0bbc089b49e828cd98d80445133634b6d34`](https://github.com/nemarDatasets/nm000112/tree/2577b0bbc089b49e828cd98d80445133634b6d34).
+The Git tree had `truncated=false`, contained exactly one expected file pair
+for each suffix 000–122, and **all 246 documents were parsed and inspected**.
+No original BDF samples, event-level ratings, source `Recording_info.csv`, or
+supplementary electrode spreadsheets were accessed.
+
+| Text-field comparison | Cohort 1 (61) | Cohort 2 (62) | Total |
+| --- | ---: | ---: | ---: |
+| SamplingFrequency = 250 Hz | 55 | 0 | **55** |
+| SamplingFrequency = 1000 Hz | 6 | 62 | **68** |
+| Expected 32-channel name/order signature | 61 | 62 | **123** |
+| Manufacturer = `Biosemi` | 61 | 62 | **123** |
+| EEGReference = `n/a` | 61 | 62 | **123** |
+| EEGGround = `n/a` | 61 | 62 | **123** |
+| All 32 channels typed `EEG` | 61 | 62 | **123** |
+| All channel units reported as `µV` or `uV` | 61 | 62 | **123** |
+| Per-channel sampling frequency agrees with EEG JSON | 61 | 62 | **123** |
+
+**Unexpected documentary discrepancy:** at this **same pinned commit**,
+[`README.md`](https://github.com/nemarDatasets/nm000112/blob/2577b0bbc089b49e828cd98d80445133634b6d34/README.md)
+(Git blob `55b05cc3c3b6d92acbf216a4bc1bfa6eb66f3305`) and
+[`code/faced.py`](https://github.com/nemarDatasets/nm000112/blob/2577b0bbc089b49e828cd98d80445133634b6d34/code/faced.py)
+state that 92 participants were sampled at 1000 Hz and 31 at 250 Hz.
+The **actual declared BIDS sidecar distribution is 68 at 1000 Hz and 55
+at 250 Hz**, a 24-record difference in each category. **No raw signal
+sampling frequencies were verified**, so this result establishes a
+*README-to-BIDS-metadata conflict*, not a proven raw acquisition or
+conversion error. Do not revise the published rate counts or merge cohorts
+by assumed sample rate until the original `Recording_info.csv` and raw
+BDF headers are reconciled.
+
+The cohort-2 sidecars label `HEOR` and `HEOL` as type `EEG` in all 62
+records. This remains a *metadata classification*, not evidence that these
+are physically the same sites as `A1/A2` or eligible for standard scalp
+EEG electrode comparisons. Every sidecar still lacks a declared digital
+reference and ground. In combination with published source Neuracle/CPz/
+AFz and derivative `Biosemi`, **all scientific cross-cohort montage and
+reference-equivalence claims remain blocked**.
+
+**Reproducibility and qualification:** the verification is pinned to the
+specified **Git commit tree**, not claimed to have used the later NEMAR
+published v1.1.4 release. The GitHub repository connector returned parsed
+text content of each file. Checkpoints were verified in 13 contiguous
+ranges (000–009, 010–019, …, 120–122), retaining only aggregate
+statistics in this report. `audit_recording_sample` was extended to
+compare the documentation-level rates **only if all 123 distinct BIDS
+records** are supplied and all recording rates are valid; partial samples
+cannot certify or reject the global rate distribution. The synthetic
+regressions check both agreement and disagreement with the README, as well
+as per-channel frequency mismatch handling.
+
+**Required next evidence:** independently read `Recording_info.csv` from
+the original FACED Synapse source, verify raw BDF header rates and physical
+channel metadata, resolve the public derivative's unknown reference,
+inspect authoritative S2/S3 or `Electrode_Location.xlsx`, and then
+freeze the P01 protocol *before* empirical training. The actual 123-file
+sidecar census does **not** remove any of these blockers.
