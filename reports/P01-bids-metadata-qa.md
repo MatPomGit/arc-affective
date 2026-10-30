@@ -4,7 +4,7 @@
 
 ## Source facts
 
-The publicly described [FACED NEMAR v1.1.4](https://nemar.org/dataset/nm000112?v=v1.1.4) release (DOI 10.82901/nemar.nm000112) advertises CC BY 4.0, 123 participants, 32-channel EEG and 250/1000 Hz acquisition depending on recording. The [author-maintained BIDS conversion description](https://github.com/nemarDatasets/nm000112) states events include video markers and valence/arousal self-ratings, which must be reconciled against the original trial reports. This is a public catalogue/README review; **no original `_eeg.json`, `_channels.tsv`, `_events.tsv`, `_electrodes.tsv` or raw signal was fetched or inspected in this implementation**. Real BIDS sidecar structure and rating availability must be verified per recording. Large files and identifiable participant information stay outside Git.
+The publicly described [FACED NEMAR v1.1.4](https://nemar.org/dataset/nm000112?v=v1.1.4) release (DOI 10.82901/nemar.nm000112) advertises CC BY 4.0, 123 participants, 32-channel EEG and 250/1000 Hz acquisition depending on recording. The [author-maintained BIDS conversion description](https://github.com/nemarDatasets/nm000112) states events include video markers and valence/arousal self-ratings, which must be reconciled against the original trial reports. The initial review used only public catalogue/README materials. A follow-up inspected the actual *public text sidecars* of one recording from a pinned upstream Git commit, without accessing raw EEG. Details and limitations appear below. The rights of all data releases and suitability for participant-level analysis remain independently unverified. Large signal files and identifiable participant information stay outside Git.
 
 ## New offline gate
 
@@ -35,3 +35,21 @@ The paths are **illustrative**, not verified actual file names. The CLI never to
 4. Freeze M1 protocol before running primary held-out model comparisons; only then run actual corpus-level data analyses.
 
 Unit tests use synthetic BIDS-like JSON/TSV metadata. Never present them as original FACED measurements.
+
+## Source-pinned FACED BIDS sub-000 sidecar inspection (2026-10-30)
+
+Upstream read-back: [`nemarDatasets/nm000112`, commit `2577b0bbc089b49e828cd98d80445133634b6d34`](https://github.com/nemarDatasets/nm000112/tree/2577b0bbc089b49e828cd98d80445133634b6d34/sub-000/eeg). The publicly readable `_eeg.json`, `_channels.tsv`, `_events.tsv` and `_events.json` files were inspected as **text only**, without fetching `_eeg.bdf` (an annex pointer) or participant-derived binary data. This source revision has not been checksum-reconciled with NEMAR v1.1.4.
+
+| Observed field | Public recording sub-000 | Interpretation |
+| --- | --- | --- |
+| SamplingFrequency | 1000 Hz | Some other recordings reportedly use 250 Hz; this observation only covers one recording |
+| EEGChannelCount / channel rows | 32 / 32 EEG | Consistent channel count, not proof of channel reference |
+| Units | `µV` | Preserve amplitude units |
+| EEGReference and EEGGround | `n/a`, `n/a` | **Reference equivalence remains blocked** |
+| `events.tsv` | 33 rows; 28 contain numeric `Valence`, 5 do not | Technical markers must not be mistaken for zero-valence trials |
+| `video_index` | Present on all 28 rated rows | Candidate stimulus key; real label-to-EEG alignment still requires verification |
+| `electrodes.tsv` / `coordsystem.json` | No matching files in the full, nontruncated public upstream Git tree | No measured 3-D coordinate/frame equivalence is documented here |
+
+**Decision:** one-recording public metadata inspection supports possible *within-dataset* feasibility work. It does not meet the gate for cross-corpus transfer, verified physical montage/reference compatibility, licensed signals or actual classification results. Names/positions and self-report semantics must be checked against authoritative acquisition documentation. No scalar affect ratings were copied into project files.
+
+The local validator now cross-checks `EEGChannelCount`, validates optional per-channel `sampling_frequency`, permits negative BIDS event onsets and `n/a` event duration, and has three additional synthetic regression tests. Public sidecar files were read for this desk audit but **not tested as local inputs**.
