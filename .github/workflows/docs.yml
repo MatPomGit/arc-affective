@@ -21,6 +21,8 @@ on:
       - "tests/test_p01_bids_qc.py"
       - "tests/test_p01_event_linkage.py"
       - "tests/test_p01_continuous.py"
+      - "tests/test_p01_continuous_inference.py"
+      - "src/arc_affective/p01_continuous_inference.py"
       - "src/arc_affective/p01_continuous.py"
       - "src/arc_affective/p01_event_linkage.py"
       - "src/arc_affective/p01_bids_qc.py"
@@ -49,6 +51,8 @@ on:
       - "tests/test_p01_bids_qc.py"
       - "tests/test_p01_event_linkage.py"
       - "tests/test_p01_continuous.py"
+      - "tests/test_p01_continuous_inference.py"
+      - "src/arc_affective/p01_continuous_inference.py"
       - "src/arc_affective/p01_continuous.py"
       - "src/arc_affective/p01_event_linkage.py"
       - "src/arc_affective/p01_bids_qc.py"
@@ -105,6 +109,8 @@ jobs:
         run: python -m unittest discover -s tests -p test_p01_event_linkage.py -v
       - name: Validate P01 synthetic continuous-valence regression
         run: python -m unittest discover -s tests -p test_p01_continuous.py -v
+      - name: Validate P01 continuous-valence uncertainty
+        run: python -m unittest discover -s tests -p test_p01_continuous_inference.py -v
       - name: Build strict MkDocs site
         run: mkdocs build --strict
       - name: Prepare GitHub Pages
