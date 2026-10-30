@@ -26,3 +26,7 @@ For B, ensure the primary endpoint in issue #22, `papers/P01-protocol.md` and `m
 - No original EEG model predictions or empirical confidence intervals have been produced.
 - Synthetic code may run to check correctness but not to select the primary estimand by performance.
 - Do not use BIDS `binary_label` (video's targeted category) as a proxy for the participant's continuous `Valence`.
+
+## Synthetic continuous-path readiness (2026-10-30)
+
+Added [continuous LOSO ridge software QA](https://github.com/MatPomGit/arc-affective/blob/main/src/arc_affective/p01_continuous.py) and [technical limitations](https://github.com/MatPomGit/arc-affective/blob/main/reports/P01-continuous-qa.md). This allows candidate A to be tested without any real EEG. It **does not approve CCC** as the primary P01 outcome, remove the conflict with BA in the manuscript, or change this document's **DRAFT** status. Empirical baseline and endpoint remain blocked pending signed prospective protocol and legally obtained recordings.
