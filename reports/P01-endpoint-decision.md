@@ -30,3 +30,7 @@ For B, ensure the primary endpoint in issue #22, `papers/P01-protocol.md` and `m
 ## Synthetic continuous-path readiness (2026-10-30)
 
 Added [continuous LOSO ridge software QA](https://github.com/MatPomGit/arc-affective/blob/main/src/arc_affective/p01_continuous.py) and [technical limitations](https://github.com/MatPomGit/arc-affective/blob/main/reports/P01-continuous-qa.md). This allows candidate A to be tested without any real EEG. It **does not approve CCC** as the primary P01 outcome, remove the conflict with BA in the manuscript, or change this document's **DRAFT** status. Empirical baseline and endpoint remain blocked pending signed prospective protocol and legally obtained recordings.
+
+## Continuous-score uncertainty risk register (2026-10-30)
+
+The [candidate participant-bootstrap implementation](https://github.com/MatPomGit/arc-affective/blob/main/src/arc_affective/p01_continuous_inference.py) is tested only on synthetic output and *blocks* CCC intervals if any held-out participant has undefined CCC. The [statistical QA](https://github.com/MatPomGit/arc-affective/blob/main/reports/P01-continuous-inference-qa.md) explicitly warns that LOSO fold scores share training participants, so naive fold bootstrapping is a descriptive check rather than a confirmatory population interval. M1 remains **DRAFT**; no performance-derived metric choice or experimental preregistration has occurred.
