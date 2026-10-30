@@ -116,6 +116,40 @@ class EventLinkageTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             audit_event_linkage(events, stimuli, expected_clips=True)
 
+    def test_technical_marker_alert_is_independent_of_rated_video_count(self):
+        events, stimuli = fixture()
+        marker = dict(events[0])
+        # 3 expected videos => 6 unlinked markers is the review boundary.
+        boundary = events + [dict(marker) for _ in range(5)]
+        normal = audit_event_linkage(boundary, stimuli, expected_clips=3)
+        self.assertEqual(normal["unlinked_technical_events"], 6)
+        self.assertFalse(normal["technical_event_review_required"])
+        self.assertEqual(normal["status"], "structurally_consistent_only")
+
+        flagged = audit_event_linkage(
+            boundary + [dict(marker)], stimuli, expected_clips=3)
+        self.assertEqual(flagged["observed_unique_videos"], 3)
+        self.assertEqual(flagged["missing_rating_count"], 0)
+        self.assertEqual(flagged["unlinked_technical_events"], 7)
+        self.assertEqual(flagged["technical_event_excess_count"], 1)
+        self.assertTrue(flagged["technical_event_review_required"])
+        self.assertIn("excessive_unlinked_technical_event_burden",
+                      flagged["blockers"])
+        self.assertEqual(flagged["status"], "blocked")
+        self.assertFalse(flagged["automatic_exclusion_from_EEG_analysis"])
+
+    def test_large_unlinked_marker_burden_stays_a_review_not_signal_proof(self):
+        events, stimuli = fixture()
+        events += [dict(events[0]) for _ in range(1000)]
+        report = audit_event_linkage(events, stimuli, expected_clips=3)
+        self.assertEqual(report["observed_unique_videos"], 3)
+        self.assertEqual(report["unlinked_technical_events"], 1001)
+        self.assertTrue(report["technical_event_review_required"])
+        self.assertFalse(report["raw_eeg_trigger_alignment_verified"])
+        self.assertFalse(report["analysis_ready"])
+        self.assertFalse(report["automatic_exclusion_from_EEG_analysis"])
+        self.assertNotIn("Experiment start", str(report))
+
     def test_negative_technical_onset_is_permitted(self):
         events, stimuli = fixture()
         events[0]["onset"] = "-2.4"
