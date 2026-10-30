@@ -132,7 +132,7 @@ class ContinuousEvaluationTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             evaluate(self.rows[:2])
         with self.assertRaises(ValueError):
-            evaluate([replace(r, features=(1.0,)) for r in self.rows])
+            evaluate([replace(self.rows[0], features=(1.0,))] + self.rows[1:])
         with self.assertRaises(ValueError):
             fit_ridge(self.rows, True)
         with self.assertRaises(ValueError):
