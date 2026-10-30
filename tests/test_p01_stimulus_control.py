@@ -127,8 +127,8 @@ class StimulusControlTests(unittest.TestCase):
         # One clip occurs in only one subject; its intersection still has
         # enough train clips, but its own test is one held-out rating only.
         rows = [r for r in self.rows
-                if r.stimulus != "synthetic-film03" or
-                r.participant == "synthetic-p00"]
+                if not (r.participant == "synthetic-p00" and
+                        r.stimulus in ("synthetic-film02", "synthetic-film03"))]
         with self.assertRaises(ValueError):
             validate_trials(rows)
         with self.assertRaises(ValueError):
