@@ -4,6 +4,7 @@
 - **Affective state:** operationalized against explicitly timed self-report (valence/arousal) or dataset annotations, not claimed to be directly read from physiology.
 - **Cognitive workload:** task-demand manipulation plus behavioral outcome, subjective report (e.g., NASA-TLX where appropriate) and optional sensor proxies; difficulty condition is *not* ground-truth internal workload.
 - **Expression/kinematics:** observable behavior; cannot automatically be equated with emotional state or diagnosis.
+- **Acoustic context:** optional sound event, RMS and spectral features may quantify ambient events or vocal activity with consent; they are not a validated readout of affect or workload. A pair of radio microphones with a shared mono receiver cannot supply independent stereo channels, TDOA or source localisation. Validate channel mapping, DSP, recording rights and synchronization first.
 - **Engineering utility:** latency, jitter, device uptime, missingness, CPU/GPU/RAM, workload and robot safety metrics.
 
 ## Splits, leakage and statistics
