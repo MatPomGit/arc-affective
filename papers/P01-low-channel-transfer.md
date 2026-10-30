@@ -35,3 +35,9 @@ Show reproducible subject-disjoint evaluation, positive delta against appropriat
 
 ## Manuscript work in progress (2026-10-30)
 A substantive [IEEEtran LaTeX draft](https://github.com/MatPomGit/arc-affective/blob/main/manuscripts/P01/main.tex) now contains a literature-positioned introduction, explicit train-only LOSO evaluation, hardware/montage eligibility rules, negative controls, planned reporting and limitations. The [analysis protocol](https://github.com/MatPomGit/arc-affective/blob/main/papers/P01-protocol.md) is a **candidate**, not a registered study. Newly relevant 2026 work reports severe identity confounding (DOI: [10.3390/s26175327](https://doi.org/10.3390/s26175327)); a generic low-channel result would overlap it. Actual rights/metadata audit, experiment and publication claims remain blocked; the manuscript has no fabricated outcomes.
+
+## P01 grouped baseline software (2026-10-30)
+
+A runnable [synthetic-only nested LOSO evaluation](https://github.com/MatPomGit/arc-affective/blob/main/src/arc_affective/p01_evaluation.py) now includes participant-disjoint outer folds, training-only scaling, train-only prevalence and L2 logistic regression, inner subject-grouped hyperparameter selection and explicit single-class held-out handling. See [QA and limitations](https://github.com/MatPomGit/arc-affective/blob/main/reports/P01-evaluation-qa.md). This is software E0, **not** a completed EEG baseline, real corpus result or M3 evidence gate; data rights, original EEG adapters, M1 analysis freeze and empirical validation are still pending.
+
+Evaluation correction (2026-10-30): trial-averaged predictions and equal per-trial training weights address window-level pseudo-replication for trial-labelled outcomes. Final real EEG validation still requires the pre-analysis protocol, dataset and montage gates.
