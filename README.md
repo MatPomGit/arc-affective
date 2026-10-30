@@ -8,7 +8,7 @@ Engineering research programme on **affective and cognitive state monitoring**, 
 
 - **Local studies:** 1 researcher by default, at most 3 adult university staff volunteers; repeated-measures/N-of-1 experiments and engineering benchmarks.
 - **Generalisation:** only external datasets with verified access/terms and participant-disjoint evaluation. N=1 is never evidence of population-level accuracy.
-- **Hardware:** Muse S Athena (EEG/optional fNIRS/PPG; research-data access unverified), Tobii Eye Tracker 5 (**gaming interaction only under the standard licence**, not raw-data capture), Ultraleap Leap Motion Controller 2 (hardware identified; Hyperion/LeapC compatibility, legal research use and runtime unverified), RGB webcams.
+- **Hardware:** Muse S Athena (EEG/optional fNIRS/PPG; research-data access unverified), Tobii Eye Tracker 5 (**gaming interaction only under the standard licence**, not raw-data capture), Ultraleap Leap Motion Controller 2 (hardware identified; Hyperion/LeapC compatibility, legal research use and runtime unverified), RGB webcams, **2 × Slayo Mike S9 wireless lavalier microphones with one USB-C receiver** (capture/channel separation unverified; do not assume stereo or spatial audio).
 - **No paid dependencies:** if data/software licence is paid or inaccessible, disable that modality or use an open-data/engineering fallback. No paid API, hosted GPU or subscription required.
 - **Reproducibility:** preregistered primary endpoints and splits; leakage checks, baselines, uncertainty, ablations, data provenance and local offline tests.
 - **Privacy:** no raw biometric recordings or third-party datasets in Git; use consent, controlled local storage and publish only licensed, de-identified outputs.
