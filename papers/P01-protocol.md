@@ -82,3 +82,15 @@ At pinned NEMAR commit `2577b0b...`, 250-Hz BIDS metadata belong to
 and regression tests now reflect these record-level facts. The original
 source CSV has still not been read, and neither source acquisition rates
 nor real signal calibration are certified.
+
+## Unlinked FACED BIDS event markers and trial QC (2026-10-30)
+
+A [targeted public `events.tsv` inspection](https://github.com/MatPomGit/arc-affective/blob/main/reports/P01-event-linkage-qa.md)
+found 1171 and 1445 unlinked technical events in `sub-059` and
+`sub-060` respectively, despite 28 video-linked, rated trials in each.
+The event-to-stimulus validator now triggers **manual review** when such
+unlinked markers exceed an operational alert threshold. This flag is
+**not** evidence of EEG corruption, not a prospectively chosen exclusion
+criterion, and must not silently delete participants or trials. Inspect
+original `evt.bdf` and conversion logs before interpreting trigger
+timing or accepting signal-label synchronization. M1 remains DRAFT.

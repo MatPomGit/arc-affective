@@ -46,3 +46,45 @@ A structurally consistent report always sets `analysis_ready=false`, `original_r
 ## Missing evidence
 
 Before claims about signal-label alignment or empirical generalization, obtain approved original EEG and `evt.bdf` access, validate source marker extraction, self-report-to-video association, recording-specific scaling/reference and reproducible dataset checksums. Freeze a primary endpoint and its target mapping in issue #22 *before* applying it to held-out EEG. No primary endpoint or scientific novelty is declared here.
+
+## High unlinked-marker burden in selected public event sidecars (2026-10-30)
+
+A targeted read-only check of [pinned NEMAR `nm000112`](https://github.com/nemarDatasets/nm000112/tree/2577b0bbc089b49e828cd98d80445133634b6d34) found that the `events.tsv` event count cannot be used as a trial count. Public text metadata show:
+
+| Recording suffix | All events | Video-linked trials | Unlinked / technical events | Video-linked rows with missing `Valence` |
+| --- | ---: | ---: | ---: | ---: |
+| 000 | 33 | 28 | 5 | 0 |
+| 055 | 42 | 28 | 14 | 0 |
+| 058 | 37 | 28 | 9 | 0 |
+| **059** | **1199** | **28** | **1171** | **0** |
+| **060** | **1473** | **28** | **1445** | **0** |
+| 061 | 37 | 28 | 9 | 0 |
+| 122 | 37 | 28 | 9 | 0 |
+
+This table represents **selected actual public sidecars**, not a
+123-recording event census and not original BDF trigger validation. Most
+extra rows in 059/060 carry numeric `trial_type` codes, not a usable
+`video_index` or participant self-report. These may be technical or
+converter-emitted events; their origin, timing and effect on signal
+integrity have **not been determined**. The 28 video-linked ratings
+remain present in both records. Do not infer that the extra rows are 1171
+or 1445 additional emotional trials, or automatically discard those
+participants as invalid signal.
+
+The existing `audit_event_linkage()` validator now raises a
+**manual-review stop flag** when unrelated markers exceed the deliberately
+conservative *operational* threshold of **twice the expected number of
+videos** (56 for full FACED). The exact flag is
+`excessive_unlinked_technical_event_burden` and
+`technical_event_review_required=true`. This is an **engineering
+anomaly alert**, chosen after inspecting the public sidecars; it is **not
+a scientifically validated artifact rejection threshold**, and it is
+**not** a pre-registered participant exclusion rule. It changes the
+event-metadata QA `status` to `blocked` until manual review while keeping
+`automatic_exclusion_from_EEG_analysis=false`. No EEG data is read,
+deleted, interpolated or excluded.
+
+Before using all 28 trials from affected recordings in any signal-level
+analysis, verify original `evt.bdf` markers, event conversion provenance,
+video-trigger alignment and waveform segments on permitted local data.
+Keep M0/M1/M2 open; the block-splitting proof in PR #96 is software-only.

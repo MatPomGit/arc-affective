@@ -157,6 +157,13 @@ def audit_event_linkage(
         blockers.append("sample_onset_mismatch")
     if overlapping:
         blockers.append("overlapping_video_events")
+    # Operational manual-review alert only, not a valid automatic exclusion
+    # criterion. Some BDF event streams preserve unrelated trigger chatter.
+    # No count-based conclusion about actual signal quality is warranted.
+    technical_review_threshold = 2 * expected_clips
+    technical_review_required = technical_markers > technical_review_threshold
+    if technical_review_required:
+        blockers.append("excessive_unlinked_technical_event_burden")
     return {
         "schema_version": 1,
         "evidence_type": "public_or_local_metadata_only",
@@ -166,6 +173,11 @@ def audit_event_linkage(
         "observed_unique_videos": len(seen),
         "missing_video_count": missing_clips,
         "unlinked_technical_events": technical_markers,
+        "technical_event_review_threshold": technical_review_threshold,
+        "technical_event_review_required": technical_review_required,
+        "technical_event_excess_count": max(
+            0, technical_markers - technical_review_threshold),
+        "automatic_exclusion_from_EEG_analysis": False,
         "missing_rating_count": missing_rating,
         "duration_outlier_count": duration_outliers,
         "stimulus_category_mismatch_count": wrong_target_category,
