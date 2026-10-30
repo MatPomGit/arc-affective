@@ -15,3 +15,7 @@
 **Stop decisions:** G0 blocks data downloads without rights. No compatible montage/reference -> no cross-corpus transfer claim. No participant-disjoint split -> no primary outcome. Manuscript result tables remain pending until a reproducible run and independent check.
 
 **Scientific overlap check:** Pandilova et al., *Sensors* 2026, DOI [10.3390/s26175327](https://doi.org/10.3390/s26175327), already test identity confounding and compact montage; the proposed novelty must go beyond a generic leakage-free re-evaluation. Cross-dataset transfer literature and consumer EEG baselines also exist ([2024 review](https://doi.org/10.1016/j.neucom.2024.128354), [2025 comparison](https://doi.org/10.3390/s25237262)).
+
+## Access evidence (2026-10-30)
+
+The [dataset-origin desk audit](https://github.com/MatPomGit/arc-affective/blob/main/reports/P01-data-audit.md) identifies DREAMER as access-request restricted, and unresolved current download paths for DEAP and AMIGOS. This metadata review **does not pass G0** or authorize any original data download. Keep P01 #14, #22, #30 open; do not mark the planned cross-corpus factorial study as feasible until an original licensed corpus and montage/annotation compatibility are proven. Use existing public paper metadata and synthetic fixtures for implementation preparation only.

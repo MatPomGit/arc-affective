@@ -18,3 +18,7 @@ Maintain private `data/registry.local.json` with `name, version, citation, acces
 Each paper must demonstrate: accessible legally obtained original data; modalities actually released, compatible synchronized ground truth, subject-disjoint splits, preprocessing exclusively fitted on train, test-independent hyperparameter search, no per-window subject leakage, bootstrapped uncertainty at **subject or session level** (not correlated windows). Dataset identity is a possible confound; cross-dataset transfer claims require equivalent labels and explicit harmonization.
 
 A dataset named in a plan is only a *candidate*. If its rights, content or timing do not fit, switch to an audited dataset and update the preregistered protocol before any final testing.
+
+## P01 desk audit update, 2026-10-30
+
+[Detailed evidence, metadata compatibility and acquisition blockers](https://github.com/MatPomGit/arc-affective/blob/main/reports/P01-data-audit.md): DEAP access link was unreachable in this check, DREAMER has an explicit restricted Zenodo request, and the AMIGOS author listing is available while its original download link was unresponsive. **No dataset is marked legally acquired**, no original file hash or rights agreement has been inspected, and none of these candidates can yet be used for a reproducible P01 experiment. A third-party registry also labels DEAP service unavailable; this does not establish permanent deprecation.
