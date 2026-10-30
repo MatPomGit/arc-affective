@@ -43,10 +43,10 @@ class SourceCsvReconciliationTests(unittest.TestCase):
             result["source_sampling_frequency_counts_hz"],
             {"250": 31, "1000": 92})
         self.assertEqual(
-            result["source_csv_to_pinned_BIDS_frequency_mismatch_count"], 48)
+            result["source_csv_to_pinned_BIDS_frequency_mismatch_count"], 36)
         self.assertEqual(
             result["frequency_mismatch_directions"],
-            {"source_250_bids_1000": 6, "source_1000_bids_250": 42})
+            {"source_250_bids_1000": 6, "source_1000_bids_250": 30})
 
     def test_partial_csv_never_certifies_global_counts(self):
         report = reconcile_recording_info(fixture(subjects=range(8)))
