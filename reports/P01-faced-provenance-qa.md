@@ -37,3 +37,38 @@ The [full static audit](P01-converter-qa.md) distinguishes the original paper's 
 ## Public independent preprocessing code read-back (2026-10-30)
 
 A separately pinned [third-party copy of FACED's preprocessed `*.pkl` pipeline](https://github.com/Rmin-cmd/FACED_Code/blob/8aa55c1b6d503d92b5db5a87b576a361115a6a02/Preprocessing/Preprocessing.py) includes `set_eeg_reference(ref_channels='average')`, a cohort-1 channel-index permutation, and renaming of the final cohort-2 channels to A2/A1. This provides a **candidate array-index linkage** between six previously unmatched BIDS name labels. See [preprocessed-order evidence QA](P01-faced-preprocessed-order-qa.md). **The mirror is not independently authenticated** against original Synapse `Code/`, and source-paper S2/S3 positions remain unchecked. Do not apply the candidate links to the independent BIDS signal or claim physical equivalence. E0 software-only validation.
+
+## Six-recording source-pinned sidecar spot check (2026-10-30)
+
+A manual read-back via the GitHub repository connector of **six actual public metadata pairs** at upstream commit `2577b0bbc089b49e828cd98d80445133634b6d34` inspected subject-number suffixes **000, 030, 060, 061, 090 and 122**. This is a 6/123 **sample**, *not* a population census or any EEG sample analysis.
+
+| Property | Cohort 1 (000,030,060) | Cohort 2 (061,090,122) |
+| --- | --- | --- |
+| `_eeg.json` frequency (Hz) | 1000, 250, 250 | 1000, 1000, 1000 |
+| `Manufacturer` | Biosemi in all 3 | Biosemi in all 3 |
+| `EEGReference`, `EEGGround` | n/a in all 3 | n/a in all 3 |
+| Channel count and ordering | 32, identical to sub-000 | 32, identical to sub-061 |
+| Channel types | EEG for all 32 | EEG for all 32, including HEOR/HEOL |
+
+Thus 250 and 1000 Hz both occur **within cohort 1**, and sample rate must **never** be inferred solely from cohort assignment. The channel-name layout was consistent in this six-recording sample, but 117 recordings remain unexamined. The BIDS label `EEG` for `HEOR/HEOL` is a **derivative metadata classification**, not proof of physical EEG-sensor type or mastoid location. This sample does not verify source raw amplitude units or original reference. <https://github.com/nemarDatasets/nm000112/tree/2577b0bbc089b49e828cd98d80445133634b6d34>
+
+`audit_recording_sample()` and the existing provenance CLI now accept an optional *local, explicitly specified* JSON manifest listing `subject_number`, `eeg_json` path and `channels_tsv` path for as many as 123 observations. They validate strict channel order, sampling rates, unit labels and sample coverage **without exporting participant IDs or reading raw BDF**. Even a full 123-recording sidecar census cannot approve scientific equivalence.
+
+Illustrative locally reviewed manifest (paths must be to permitted **text metadata**):
+
+```json
+[
+  {
+    "subject_number": 0,
+    "eeg_json": "/authorized/sub-000_task-watchingVideoClips_eeg.json",
+    "channels_tsv": "/authorized/sub-000_task-watchingVideoClips_channels.tsv"
+  }
+]
+```
+
+```bash
+PYTHONPATH=src python -m arc_affective.p01_faced_provenance --cohort-manifest-json /authorized/sidecar_manifest.json
+python -m unittest discover -s tests -p test_p01_faced_provenance.py -v
+```
+
+This work could not retrieve the original supplementary S2/S3 tables (including the linked DOCX) or `Electrode_Location.xlsx` through current public retrieval paths. Source anatomical mapping remains blocked.

@@ -6,10 +6,13 @@ Passing metadata cannot verify the actual digital reference transformation.
 from __future__ import annotations
 
 import argparse
+from collections import Counter
+import math
 import json
 from pathlib import Path
 
 from .p01_bids_qc import MISSING, read_json, read_tsv
+from .p01_faced_preprocessing_order import BIDS_COHORT1, BIDS_COHORT2, BIDS_COMMIT
 
 EXPECTED = {
     "eeg_device": "Neuracle NeuSen.W32",
@@ -117,23 +120,147 @@ def compare_cohorts(left: dict, right: dict) -> dict:
     }
 
 
+
+def audit_recording_sample(records: list[dict]) -> dict:
+    """Audit multiple local BIDS sidecar pairs, output aggregate counts only.
+
+    Each record requires numeric subject_number, eeg_json dict and channels
+    TSV rows. The two known inventories are pinned to public NEMAR text
+    sidecars; one sampled person cannot certify every cohort recording.
+    """
+    if not isinstance(records, list) or not records or len(records) > 123:
+        raise ValueError("One to 123 metadata-only recordings required")
+    seen = set()
+    cohort_counts = Counter()
+    sampling = Counter()
+    mismatched = 0
+    unexpected_frequencies = 0
+    nonstandard_units = 0
+    eog_named_eeg = 0
+    provenance_conflicts = Counter()
+    for item in records:
+        if not isinstance(item, dict) or set(item) != {
+            "subject_number", "eeg_json", "channels"
+        }:
+            raise ValueError("Expected strict metadata record structure")
+        sid = item["subject_number"]
+        if type(sid) is not int or sid < 0 or sid > 122 or sid in seen:
+            raise ValueError("Invalid or repeated source participant number")
+        seen.add(sid)
+        cohort = 1 if sid <= 60 else 2
+        expected = BIDS_COHORT1 if cohort == 1 else BIDS_COHORT2
+        eeg, channels = item["eeg_json"], item["channels"]
+        details = audit_recording(eeg, channels)
+        for conflict in details["conflicts"]:
+            provenance_conflicts[conflict] += 1
+        names = [row["name"] for row in channels if row["type"].upper() == "EEG"]
+        if names != expected:
+            mismatched += 1
+        cohort_counts[str(cohort)] += 1
+        frequency = eeg.get("SamplingFrequency")
+        if (type(frequency) not in (int, float) or
+                not math.isfinite(frequency) or frequency not in (250, 1000)):
+            unexpected_frequencies += 1
+        else:
+            sampling[str(int(frequency))] += 1
+        if any(row.get("units") not in ("µV", "uV")
+               for row in channels if row["type"].upper() == "EEG"):
+            nonstandard_units += 1
+        if any(name in ("HEOR", "HEOL") for name in names):
+            eog_named_eeg += 1
+
+    checked = len(records)
+    complete_census = seen == set(range(123))
+    blockers = [
+        "source_to_bids_reference_unverified",
+        "original_electrode_coordinates_unverified",
+        "original_recording_data_not_examined",
+    ]
+    if not complete_census:
+        blockers.append("incomplete_sidecar_population_census")
+    if mismatched:
+        blockers.append("unexpected_cohort_channel_signature")
+    if unexpected_frequencies:
+        blockers.append("unexpected_sampling_frequency")
+    if nonstandard_units:
+        blockers.append("nonstandard_or_missing_channel_unit")
+    if provenance_conflicts:
+        blockers.append("source_to_derivative_metadata_conflicts")
+    return {
+        "schema_version": 1,
+        "status": "blocked_for_signal_inference",
+        "evidence_type": "public_or_local_metadata_sidecars_only",
+        "source_commit": BIDS_COMMIT,
+        "recordings_checked": checked,
+        "cohort_1_checked": cohort_counts["1"],
+        "cohort_2_checked": cohort_counts["2"],
+        "full_123_recording_census": complete_census,
+        "sampling_frequency_counts_hz": dict(sorted(sampling.items())),
+        "unexpected_sampling_frequency_recordings": unexpected_frequencies,
+        "unexpected_channel_signature_recordings": mismatched,
+        "missing_or_nonstandard_unit_recordings": nonstandard_units,
+        "eog_named_channels_typed_eeg_recordings": eog_named_eeg,
+        "provenance_conflict_record_counts": dict(
+            sorted(provenance_conflicts.items())
+        ),
+        "blockers": blockers,
+        "participant_identifiers_exported": False,
+        "electrode_aliasing_allowed": False,
+        "actual_montage_verified": False,
+        "original_signal_units_verified": False,
+        "analysis_ready": False,
+    }
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--eeg-json", type=Path, required=True)
-    parser.add_argument("--channels-tsv", type=Path, required=True)
+    parser.add_argument("--cohort-manifest-json", type=Path)
+    parser.add_argument("--eeg-json", type=Path)
+    parser.add_argument("--channels-tsv", type=Path)
     parser.add_argument("--other-eeg-json", type=Path)
     parser.add_argument("--other-channels-tsv", type=Path)
     args = parser.parse_args()
-    if bool(args.other_eeg_json) != bool(args.other_channels_tsv):
-        parser.error("Both sidecars of the second recording are required")
-    result = audit_recording(read_json(args.eeg_json),
-                             read_tsv(args.channels_tsv))
-    if args.other_eeg_json:
-        second = audit_recording(read_json(args.other_eeg_json),
-                                 read_tsv(args.other_channels_tsv))
-        result = {"source": "pinned_public_sidecars_only",
-                  "recordings": [result, second],
-                  "cohort_comparison": compare_cohorts(result, second)}
+    if args.cohort_manifest_json is not None:
+        if any((args.eeg_json, args.channels_tsv,
+                args.other_eeg_json, args.other_channels_tsv)):
+            parser.error("Use either the cohort manifest or a pair of sidecars")
+        raw = read_json(args.cohort_manifest_json)
+        if type(raw) is not list:
+            parser.error("Cohort manifest must contain an array of entries")
+        records = []
+        for entry in raw:
+            if not isinstance(entry, dict) or set(entry) != {
+                "subject_number", "eeg_json", "channels_tsv"
+            }:
+                parser.error("Invalid cohort manifest entry")
+            num = entry["subject_number"]
+            if type(num) is not int or not 0 <= num <= 122:
+                parser.error("Invalid subject_number")
+            eeg_path = Path(entry["eeg_json"])
+            channels_path = Path(entry["channels_tsv"])
+            expected = f"sub-{num:03d}_task-watchingVideoClips"
+            if (eeg_path.name != expected + "_eeg.json" or
+                    channels_path.name != expected + "_channels.tsv"):
+                parser.error("Sidecar names must match the stated subject")
+            records.append({
+                "subject_number": num,
+                "eeg_json": read_json(eeg_path),
+                "channels": read_tsv(channels_path),
+            })
+        result = audit_recording_sample(records)
+    else:
+        if not args.eeg_json or not args.channels_tsv:
+            parser.error("Both --eeg-json and --channels-tsv are required")
+        if bool(args.other_eeg_json) != bool(args.other_channels_tsv):
+            parser.error("Both sidecars of the second recording are required")
+        result = audit_recording(read_json(args.eeg_json),
+                                 read_tsv(args.channels_tsv))
+        if args.other_eeg_json:
+            second = audit_recording(read_json(args.other_eeg_json),
+                                     read_tsv(args.other_channels_tsv))
+            result = {"source": "pinned_public_sidecars_only",
+                      "recordings": [result, second],
+                      "cohort_comparison": compare_cohorts(result, second)}
     print(json.dumps(result, sort_keys=True, indent=2, allow_nan=False))
 
 
