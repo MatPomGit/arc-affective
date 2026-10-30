@@ -9,7 +9,7 @@ Does a low-channel model remain calibrated on held-out people and across corpora
 Channel sparsity × corpus shift factorial benchmark with explicit montage-reference compatibility, transfer-risk uncertainty and no false Muse-equivalence claims.
 
 ## Data and feasible instrumentation
-DEAP, DREAMER and AMIGOS (only after licence/data audit); public EEG only. No local volunteers necessary.
+DEAP, DREAMER and AMIGOS (only after licence/data audit); open-licensed fallback candidates GAMEEMO v3 and FACED NEMAR v1.1.4 (also requiring actual file and reference QA). Public EEG only. No local volunteers necessary.
 
 ## Experimental design and baselines
 Create montage registry; compare available channel subsets (not claiming Muse channel equivalence), spectral/entropy features and compact CNN; grouped LOSO in each corpus, external corpus only if labels/reference harmonize. Compare with full-channel, linear and shuffled-label baselines.

@@ -19,3 +19,7 @@
 ## Access evidence (2026-10-30)
 
 The [dataset-origin desk audit](https://github.com/MatPomGit/arc-affective/blob/main/reports/P01-data-audit.md) identifies DREAMER as access-request restricted, and unresolved current download paths for DEAP and AMIGOS. This metadata review **does not pass G0** or authorize any original data download. Keep P01 #14, #22, #30 open; do not mark the planned cross-corpus factorial study as feasible until an original licensed corpus and montage/annotation compatibility are proven. Use existing public paper metadata and synthetic fixtures for implementation preparation only.
+
+## Candidate open-data fallback, pending protocol freeze
+
+Provider evidence identifies [GAMEEMO v3](https://data.mendeley.com/datasets/b3pn4kwpmn/3), 28 participants and 14-channel EEG plus SAM ratings, and [FACED NEMAR v1.1.4](https://nemar.org/dataset/nm000112?v=v1.1.4), 123 participants, 32-channel BIDS EEG, both with provider-declared CC BY 4.0. These are lawful-first **candidate replacements**, not evaluated corpora. Check actual electrode/reference, self-report alignment, file hashes and permitted derivative reuse before G0. The different game/video induction tasks could invalidate a pooled cross-corpus label mapping; do not force them into a misleading common target. Record a signed M1 choice before starting final held-out analyses.
