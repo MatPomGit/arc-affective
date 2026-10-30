@@ -35,3 +35,7 @@ The [pinned code audit](https://github.com/MatPomGit/arc-affective/blob/main/rep
 ## Candidate processed-array channel order, not raw montage (2026-10-30)
 
 The [source-pinned read-only preprocessing audit](https://github.com/MatPomGit/arc-affective/blob/main/reports/P01-faced-preprocessed-order-qa.md) recovers six *index-level* candidate links from a third-party mirror: T3/T7, T4/T8, T5/P7, T6/P8, A2/HEOR, A1/HEOL. It applies only to the distinct original preprocessed data path that calls `set_eeg_reference('average')` and reorders its output arrays. The separately converted BIDS derivative has not been validated against this path. **These links are not approved aliases** and must not be used for physical electrode equivalence, channel-sparsity estimates, raw/BIDS processing or outcome inference until S2/S3, original code provenance and real signal transformations are verified. M1 remains DRAFT.
+
+## Prospective montage subset QA (2026-10-30)
+
+The [name-level 2/4/8 montage review](https://github.com/MatPomGit/arc-affective/blob/main/reports/P01-montage-review-qa.md) can check proposed channel-label sets against two pinned BIDS cohort inventories without EEG data. **Shared names do not imply identical physical positions or reference.** Six cohort-dependent labels and particularly A1/A2 versus HEOR/HEOL require independent S2/S3 verification. No eligible montage or endpoint has been frozen.

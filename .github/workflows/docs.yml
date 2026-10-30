@@ -25,6 +25,8 @@ on:
       - "tests/test_p01_faced_provenance.py"
       - "tests/test_p01_converter_qc.py"
       - "tests/test_p01_faced_preprocessing_order.py"
+      - "tests/test_p01_montage_review.py"
+      - "src/arc_affective/p01_montage_review.py"
       - "src/arc_affective/p01_faced_preprocessing_order.py"
       - "src/arc_affective/p01_converter_qc.py"
       - "src/arc_affective/p01_faced_provenance.py"
@@ -61,6 +63,8 @@ on:
       - "tests/test_p01_faced_provenance.py"
       - "tests/test_p01_converter_qc.py"
       - "tests/test_p01_faced_preprocessing_order.py"
+      - "tests/test_p01_montage_review.py"
+      - "src/arc_affective/p01_montage_review.py"
       - "src/arc_affective/p01_faced_preprocessing_order.py"
       - "src/arc_affective/p01_converter_qc.py"
       - "src/arc_affective/p01_faced_provenance.py"
@@ -129,6 +133,8 @@ jobs:
         run: python -m unittest discover -s tests -p test_p01_converter_qc.py -v
       - name: Validate FACED preprocessed-array channel correspondence
         run: python -m unittest discover -s tests -p test_p01_faced_preprocessing_order.py -v
+      - name: Validate P01 2/4/8 montage proposal stop rules
+        run: python -m unittest discover -s tests -p test_p01_montage_review.py -v
       - name: Build strict MkDocs site
         run: mkdocs build --strict
       - name: Prepare GitHub Pages
