@@ -14,6 +14,8 @@ on:
       - "tests/test_p08_benchmark.py"
       - "tests/test_p01_registry.py"
       - "tests/test_p01_evaluation.py"
+      - "tests/test_p01_uncertainty.py"
+      - "src/arc_affective/p01_uncertainty.py"
       - "src/arc_affective/p01_evaluation.py"
       - "src/arc_affective/p01_registry.py"
       - "src/arc_affective/p08_benchmark.py"
@@ -30,6 +32,8 @@ on:
       - "tests/test_p08_benchmark.py"
       - "tests/test_p01_registry.py"
       - "tests/test_p01_evaluation.py"
+      - "tests/test_p01_uncertainty.py"
+      - "src/arc_affective/p01_uncertainty.py"
       - "src/arc_affective/p01_evaluation.py"
       - "src/arc_affective/p01_registry.py"
       - "src/arc_affective/p08_benchmark.py"
@@ -71,6 +75,8 @@ jobs:
         run: python -m unittest discover -s tests -p test_p01_registry.py -v
       - name: Validate P01 grouped synthetic baselines
         run: python -m unittest discover -s tests -p test_p01_evaluation.py -v
+      - name: Validate P01 subject-level uncertainty analysis
+        run: python -m unittest discover -s tests -p test_p01_uncertainty.py -v
       - name: Build strict MkDocs site
         run: mkdocs build --strict
       - name: Prepare GitHub Pages
