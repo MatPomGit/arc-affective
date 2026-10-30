@@ -23,7 +23,7 @@ Program badań inżynierskich obejmujący analizę EEG, komputerowe przetwarzani
 
 - **Tobii Eye Tracker 5:** interakcja w dozwolonym zastosowaniu konsumenckim. Zbieranie danych spojrzenia do badań wymaga osobnej weryfikacji uprawnień.
 - **Muse S Athena:** potencjalne EEG i sygnały optyczne, ale dostęp do surowych strumieni badawczych pozostaje niepotwierdzony.
-- **Leap Motion:** analiza pozycji i kinematyki dłoni po sprawdzeniu rewizji urządzenia i kompatybilnego SDK.
+- **Ultraleap Leap Motion Controller 2:** zidentyfikowany sprzęt do stereowizyjnego śledzenia dłoni (IR 850 nm, zasięg 10–110 cm, FoV maks. 160° × 160°, kamery do 120 FPS). Integracja Hyperion/LeapC i uprawnienia do rejestracji danych nadal wymagają weryfikacji. Pełna [specyfikacja i bramki uruchomieniowe](hardware.md).
 - **Kamery RGB:** lokalna analiza cech obrazu, preferencyjnie bez zapisywania klatek.
 
 [Weryfikacja aparatury i licencji](hardware.md) · [Metodologia](methodology.md) · [Ochrona danych](governance.md)
