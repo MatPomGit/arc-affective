@@ -40,3 +40,7 @@ No independent source file, original `Electrode_Location.xlsx` or participant EE
 ## Explicit next research gates
 
 Before any physical montage or sparse-channel comparison, verify the original `Code/` release in Synapse or a trusted archival checksum, examine original supplementary S2/S3/electrode spreadsheet and decide whether EOG-like channels belong in the EEG sensor set, and distinguish the author's average-reference processed `*.pkl` from the independently converted BIDS signal. Obtain authorized signals before any amplitude/reference validation. M0/M1/M2 remain OPEN.
+
+## Scope of proposed 2/4/8 channel comparisons
+
+A new [read-only montage proposal check](P01-montage-review-qa.md) flags source-specific labels and unknown channels; even the 26 shared BIDS names produce only a **textual** match. Source S2/S3 remain unread. Third-party HEOR/HEOL→A2/A1 implementations must not be treated as anatomical validation, and the original EEG versus BIDS reference discrepancy remains. Neither proposed 2/4/8 subsets nor cross-cohort transfer are authorized for results.
