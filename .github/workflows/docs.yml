@@ -6,6 +6,8 @@ on:
     paths:
       - "docs/**"
       - "papers/**"
+      - "reports/**"
+      - "manuscripts/**"
       - "mkdocs.yml"
       - "requirements-docs.txt"
       - "scripts/sync_mkdocs.py"
@@ -16,6 +18,8 @@ on:
       - "tests/test_p01_evaluation.py"
       - "tests/test_p01_uncertainty.py"
       - "tests/test_p01_controls.py"
+      - "tests/test_p01_bids_qc.py"
+      - "src/arc_affective/p01_bids_qc.py"
       - "src/arc_affective/p01_controls.py"
       - "src/arc_affective/p01_uncertainty.py"
       - "src/arc_affective/p01_evaluation.py"
@@ -26,6 +30,8 @@ on:
     paths:
       - "docs/**"
       - "papers/**"
+      - "reports/**"
+      - "manuscripts/**"
       - "mkdocs.yml"
       - "requirements-docs.txt"
       - "scripts/sync_mkdocs.py"
@@ -36,6 +42,8 @@ on:
       - "tests/test_p01_evaluation.py"
       - "tests/test_p01_uncertainty.py"
       - "tests/test_p01_controls.py"
+      - "tests/test_p01_bids_qc.py"
+      - "src/arc_affective/p01_bids_qc.py"
       - "src/arc_affective/p01_controls.py"
       - "src/arc_affective/p01_uncertainty.py"
       - "src/arc_affective/p01_evaluation.py"
@@ -83,6 +91,8 @@ jobs:
         run: python -m unittest discover -s tests -p test_p01_uncertainty.py -v
       - name: Validate P01 synthetic negative controls
         run: python -m unittest discover -s tests -p test_p01_controls.py -v
+      - name: Validate P01 BIDS sidecar metadata gate
+        run: python -m unittest discover -s tests -p test_p01_bids_qc.py -v
       - name: Build strict MkDocs site
         run: mkdocs build --strict
       - name: Prepare GitHub Pages

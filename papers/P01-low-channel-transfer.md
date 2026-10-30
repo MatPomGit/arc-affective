@@ -49,3 +49,7 @@ Evaluation correction (2026-10-30): trial-averaged predictions and equal per-tri
 ### Synthetic negative controls and feature sensitivity (2026-10-30)
 
 Implemented a [train-only participant-blocked trial-label permutation](https://github.com/MatPomGit/arc-affective/blob/main/src/arc_affective/p01_controls.py) and leave-one-synthetic-feature-out sensitivity matrix. [Software QA and limitations](https://github.com/MatPomGit/arc-affective/blob/main/reports/P01-controls-qa.md) identify that a synthetic feature omission is **not** physical EEG montage ablation and that these checks yield no valid p-values or real EEG results. M3/M4 remain open.
+
+### FACED BIDS metadata inspection gate (2026-10-30)
+
+Introduced [offline BIDS sidecar QC](https://github.com/MatPomGit/arc-affective/blob/main/src/arc_affective/p01_bids_qc.py), with synthetic-only unit tests and [metadata-only audit notes](https://github.com/MatPomGit/arc-affective/blob/main/reports/P01-bids-metadata-qa.md). Explicitly refuses to equate matching channel names with proven physical montage equivalence. No original EEG signals or actual FACED BIDS sidecars were opened; M0/M1/M2 still require independent verification and source rights.
