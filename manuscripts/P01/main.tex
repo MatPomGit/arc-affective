@@ -1,0 +1,22 @@
+\documentclass[conference]{IEEEtran}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,booktabs}
+\usepackage[hidelinks]{hyperref}
+\title{Sparse-Channel EEG Affect Representation Under Cross-Dataset and Montage Shift}
+\author{\IEEEauthorblockN{Author information to be confirmed}\IEEEauthorblockA{Institutional affiliation to be confirmed}}
+\begin{document}
+\maketitle
+\begin{abstract}
+Portable affective EEG decoding is challenged by sensor density, electrode reference, participant identity and acquisition-domain shift. This work specifies a controlled benchmark that separates the effect of channel sparsity from corpus and montage incompatibility. The proposed design uses subject-disjoint evaluation, auditable channel coordinates, train-only preprocessing, strong low-capacity baselines and uncertainty at participant level. Cross-corpus inference is permitted only when acquisition and label compatibility are established. This document is a methods-stage manuscript draft: no dataset rights, experiments or predictive results are claimed as completed.
+\end{abstract}
+\begin{IEEEkeywords}
+EEG, domain shift, montage, calibration, participant-disjoint evaluation
+\end{IEEEkeywords}
+\input{sections/introduction}
+\input{sections/methods}
+\input{sections/results}
+\input{sections/discussion}
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+\end{document}

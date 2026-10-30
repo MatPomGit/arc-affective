@@ -31,3 +31,7 @@ Real-clock measurements on at least one physical node, reproducible profiles and
 
 ## Status
 **PLANNED — no measurements, experiments or publication claims completed.** Follow [methods](../docs/methodology.md), [privacy](../docs/governance.md), [hardware limits](../docs/hardware.md), and [portfolio boundaries](../docs/portfolio.md).
+
+
+## Manuscript work in progress (2026-10-30)
+A substantive [IEEEtran LaTeX draft](https://github.com/MatPomGit/arc-affective/blob/main/manuscripts/P08/main.tex) specifies real-clock event semantics, policy comparators, fault matrix, goodput and p99 reporting. The [candidate experiment protocol](https://github.com/MatPomGit/arc-affective/blob/main/papers/P08-protocol.md) remains **unfrozen** pending device capacity and M0 novelty review. The listed scheduling literature already solves several deadline-aware problems, so measured quality/freshness under modality loss must supply any independently defended contribution. No physical benchmark or system-performance result has been collected.

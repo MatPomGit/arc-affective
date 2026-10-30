@@ -1,0 +1,8 @@
+\section{Introduction}
+Multimodal interactive systems ingest camera, motion, acoustic and application events at heterogeneous rates. When service capacity falls below arrival rate, queue growth can degrade both latency and data freshness, while a policy that drops aggressively can reduce event coverage. These trade-offs are consequential for feedback systems, independently of whether any particular stream predicts affect.
+
+Real-time stream placement, latency-aware inference and adaptive reconfiguration have extensive precedents \cite{nigade2024,sedlak2025,beaver2024,dynamicbatch2024}. In particular, simple deadline scheduling is not a novelty claim. The candidate contribution here is the controlled \emph{joint} characterization of output age, modality availability, quality-gated admission and bounded tail latency under reproducible sensor-fault sequences on commodity edge nodes.
+
+\textbf{Research question:} when modalities disconnect, arrive late or deteriorate, can a bounded scheduling policy preserve useful on-time multimodal outputs better than FIFO, latest-only and bounded FIFO at the same capacity and deadline thresholds?
+
+The proposed evaluation is an engineering benchmark with synthetic metadata and, later, legally accessible sensor input. It does not imply that device timestamps, consumer eye trackers or latent emotional states have been validated.
