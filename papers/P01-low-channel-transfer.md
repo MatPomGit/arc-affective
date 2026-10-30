@@ -45,3 +45,7 @@ Evaluation correction (2026-10-30): trial-averaged predictions and equal per-tri
 ### Participant-level uncertainty tooling (2026-10-30)
 
 [Parowany bootstrap uczestników](https://github.com/MatPomGit/arc-affective/blob/main/src/arc_affective/p01_uncertainty.py) dla prób-aggregated Brier ma osobne [QA i ograniczenia](https://github.com/MatPomGit/arc-affective/blob/main/reports/P01-statistics-qa.md). Moduł i demonstracja są wyłącznie syntetyczną walidacją E0. Brak rzeczywistych przedziałów ufności i wyniku eksperymentalnego.
+
+### Synthetic negative controls and feature sensitivity (2026-10-30)
+
+Implemented a [train-only participant-blocked trial-label permutation](https://github.com/MatPomGit/arc-affective/blob/main/src/arc_affective/p01_controls.py) and leave-one-synthetic-feature-out sensitivity matrix. [Software QA and limitations](https://github.com/MatPomGit/arc-affective/blob/main/reports/P01-controls-qa.md) identify that a synthetic feature omission is **not** physical EEG montage ablation and that these checks yield no valid p-values or real EEG results. M3/M4 remain open.
