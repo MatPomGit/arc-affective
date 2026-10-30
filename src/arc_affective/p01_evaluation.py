@@ -45,9 +45,9 @@ class Observation:
 def validate_rows(rows: Sequence[Observation]) -> None:
     if not rows:
         raise ValueError("No observations")
-    width = len(rows[0].features)
     if any(not isinstance(row, Observation) for row in rows):
         raise ValueError("Expected Observation objects")
+    width = len(rows[0].features)
     for row in rows:
         row.validate()
         if len(row.features) != width:
@@ -103,6 +103,41 @@ class LinearBaseline:
         return sigmoid(z)
 
 
+def trial_weights(rows: Sequence[Observation]) -> list[float]:
+    """Each (participant, trial) contributes equal total training weight."""
+    counts: dict[tuple[str, str], int] = {}
+    for row in rows:
+        key = (row.participant, row.trial)
+        counts[key] = counts.get(key, 0) + 1
+    n_trials = len(counts)
+    if not n_trials:
+        raise ValueError("Cannot weight an empty training set")
+    return [1.0 / (n_trials * counts[(row.participant, row.trial)])
+            for row in rows]
+
+
+def trial_predictions(rows: Sequence[Observation],
+                      probabilities: Sequence[float]):
+    """Collapse windows into one prediction per participant and labelled trial."""
+    if not rows or len(rows) != len(probabilities):
+        raise ValueError("Aligned, nonempty trial predictions required")
+    grouped: dict[tuple[str, str], tuple[int, list[float]]] = {}
+    for row, probability in zip(rows, probabilities):
+        if type(probability) not in (float, int) or not math.isfinite(probability):
+            raise ValueError("Nonfinite trial probability")
+        if not 0 <= probability <= 1:
+            raise ValueError("Probability outside [0,1]")
+        key = (row.participant, row.trial)
+        if key not in grouped:
+            grouped[key] = (row.label, [])
+        label, values = grouped[key]
+        if label != row.label:
+            raise ValueError("Conflicting trial labels")
+        values.append(probability)
+    return ([label for label, _ in grouped.values()],
+            [sum(values) / len(values) for _, values in grouped.values()])
+
+
 def fit_linear(rows: Sequence[Observation], alpha: float) -> LinearBaseline:
     """Train-only z-score and L2 logistic model, deterministic batch gradient."""
     if not rows or type(alpha) not in (float, int) or not 0 < alpha <= 1:
@@ -112,11 +147,13 @@ def fit_linear(rows: Sequence[Observation], alpha: float) -> LinearBaseline:
     d = len(rows[0].features)
     if any(len(row.features) != d for row in rows):
         raise ValueError("Different dimensions")
-    n = len(rows)
-    means = tuple(sum(row.features[j] for row in rows) / n for j in range(d))
+    weights_for_rows = trial_weights(rows)
+    means = tuple(sum(weight * row.features[j]
+                      for weight, row in zip(weights_for_rows, rows))
+                  for j in range(d))
     scales = tuple(max(
-        math.sqrt(sum((row.features[j] - means[j]) ** 2
-                      for row in rows) / n), 1e-10
+        math.sqrt(sum(weight * (row.features[j] - means[j]) ** 2
+                      for weight, row in zip(weights_for_rows, rows))), 1e-10
     ) for j in range(d))
     xs = [tuple((row.features[j] - means[j]) / scales[j]
                 for j in range(d)) for row in rows]
@@ -125,14 +162,13 @@ def fit_linear(rows: Sequence[Observation], alpha: float) -> LinearBaseline:
     for _ in range(300):
         dw = [0.0] * d
         db = 0.0
-        for x, row in zip(xs, rows):
+        for x, row, weight in zip(xs, rows, weights_for_rows):
             residual = sigmoid(intercept + sum(w * v for w, v in zip(weights, x))) - row.label
-            db += residual
+            db += weight * residual
             for j in range(d):
-                dw[j] += residual * x[j]
-        db /= n
+                dw[j] += weight * residual * x[j]
         for j in range(d):
-            weights[j] -= 0.12 * (dw[j] / n + alpha * weights[j])
+            weights[j] -= 0.12 * (dw[j] + alpha * weights[j])
         intercept -= 0.12 * db
     return LinearBaseline(means, scales, tuple(weights), intercept)
 
@@ -167,8 +203,9 @@ def tune_alpha(rows: Sequence[Observation]) -> float:
             tr = [r for r in rows if r.participant != participant]
             te = [r for r in rows if r.participant == participant]
             fitted = fit_linear(tr, alpha)
-            fold_scores.append(brier([r.label for r in te],
-                                     [fitted.predict(r.features) for r in te]))
+            labels, probabilities = trial_predictions(
+                te, [fitted.predict(r.features) for r in te])
+            fold_scores.append(brier(labels, probabilities))
         scores.append((sum(fold_scores) / len(fold_scores), alpha))
     return min(scores)[1]
 
@@ -184,12 +221,14 @@ def evaluate(rows: Sequence[Observation]) -> dict:
         # Nested selection is strictly restricted to outer-training people.
         alpha = tune_alpha(train)
         model = fit_linear(train, alpha)
-        prior = sum(row.label for row in train) / len(train)
-        labels = [row.label for row in test]
-        probs = [model.predict(row.features) for row in test]
-        baseline = [prior] * len(test)
+        train_labels, _ = trial_predictions(
+            train, [float(row.label) for row in train])
+        prior = sum(train_labels) / len(train_labels)
+        labels, probs = trial_predictions(
+            test, [model.predict(row.features) for row in test])
+        baseline = [prior] * len(labels)
         per_fold.append({
-            "fold": fold_index, "test_trials": len({r.trial for r in test}),
+            "fold": fold_index, "test_trials": len(labels),
             "test_windows": len(test), "training_participants": len({
                 r.participant for r in train}),
             "alpha_from_inner_cv": alpha,
@@ -206,6 +245,8 @@ def evaluate(rows: Sequence[Observation]) -> dict:
         "real_eeg_used": False, "external_validation": False,
         "recording_rights_verified": False, "protocol_frozen": False,
         "statistical_unit": "synthetic_participant",
+        "score_unit": "trial_means_within_participant",
+        "train_weight_unit": "participant_trial",
         "participants": len(folds), "windows": len(rows),
         "baseline": "train_only_prevalence",
         "model": "train_only_standardized_l2_logistic",

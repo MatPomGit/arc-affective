@@ -99,6 +99,41 @@ class GroupedEvaluationTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Conflicting labels"):
             evaluate(changed)
 
+
+    def test_trial_aggregation_prevents_window_pseudoreplication(self):
+        from arc_affective.p01_evaluation import trial_predictions, trial_weights
+        rows = [
+            Observation("p1", "a", (0.0,), 0),
+            Observation("p1", "a", (0.0,), 0),
+            Observation("p1", "b", (1.0,), 1),
+        ]
+        labels, probs = trial_predictions(rows, [0.1, 0.3, 0.9])
+        self.assertEqual(labels, [0, 1])
+        self.assertAlmostEqual(probs[0], 0.2)
+        self.assertAlmostEqual(brier(labels, probs), (0.2**2 + 0.1**2) / 2)
+        weights = trial_weights(rows)
+        self.assertAlmostEqual(sum(weights[:2]), weights[2])
+
+    def test_replication_of_whole_trial_does_not_change_training(self):
+        from arc_affective.p01_evaluation import trial_predictions
+        training = [r for r in self.rows if r.participant != "synthetic-000"]
+        trial = [r for r in training
+                 if r.participant == "synthetic-001" and r.trial == "trial-000"]
+        original = fit_linear(training, 0.1)
+        repeated = fit_linear(training + trial, 0.1)
+        for first, second in zip(original.means, repeated.means):
+            self.assertAlmostEqual(first, second, places=12)
+        for first, second in zip(original.weights, repeated.weights):
+            self.assertAlmostEqual(first, second, places=10)
+        self.assertAlmostEqual(original.intercept, repeated.intercept, places=10)
+        with self.assertRaises(ValueError):
+            trial_predictions(trial, [float("nan")] * len(trial))
+
+    def test_invalid_row_object_is_value_error(self):
+        from arc_affective.p01_evaluation import validate_rows
+        with self.assertRaises(ValueError):
+            validate_rows([None, *self.rows])
+
     def test_single_class_heldout_not_inflated(self):
         rows = synthetic_fixture(subjects=4, trials=2, seed=1)
         rows = [dataclasses.replace(r, label=(int(r.participant[-3:]) % 2))
