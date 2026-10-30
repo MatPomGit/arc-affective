@@ -99,6 +99,16 @@ def inspect_sidecars(
     }
     if not eeg_names:
         raise ValueError("No EEG channels")
+    if "EEGChannelCount" in eeg:
+        count = eeg["EEGChannelCount"]
+        if type(count) is not int or count != len(eeg_names):
+            raise ValueError("EEGChannelCount differs from channel table")
+    for row in eeg_names.values():
+        frequency = row.get("sampling_frequency")
+        if frequency is not None and str(frequency).strip().lower() not in MISSING:
+            if not math.isclose(numeric(frequency, "channel sampling frequency", minimum=1),
+                                sample_hz, rel_tol=1e-8, abs_tol=1e-8):
+                raise ValueError("EEG channel sampling frequency mismatch")
     if any(not isinstance(row, dict) or
            not REQUIRED_EVENT_COLUMNS.issubset(row) for row in events):
         raise ValueError("Invalid event table")
@@ -106,9 +116,14 @@ def inspect_sidecars(
         raise ValueError("No event metadata")
     labeled = 0
     missing = 0
+    unknown_duration = 0
     for row in events:
-        numeric(row["onset"], "onset", minimum=0)
-        numeric(row["duration"], "duration", minimum=0)
+        # BIDS permits onsets prior to the start of recording.
+        numeric(row["onset"], "onset")
+        if str(row["duration"]).strip().lower() in MISSING:
+            unknown_duration += 1
+        else:
+            numeric(row["duration"], "duration", minimum=0)
         val = row.get(rating_column)
         if val is None or str(val).strip().lower() in MISSING:
             missing += 1
@@ -155,6 +170,7 @@ def inspect_sidecars(
         "event_rows": len(events),
         "events_with_ratings": labeled,
         "events_without_ratings": missing,
+        "events_with_unknown_duration": unknown_duration,
         "rating_column": rating_column,
         "event_rating_alignment_verified": False,
         "dataset_rights_verified": False,

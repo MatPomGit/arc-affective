@@ -82,8 +82,10 @@ class BidsMetadataQATests(unittest.TestCase):
         for invalid in (float("nan"), True, -1, "unknown"):
             with self.subTest(invalid=invalid), self.assertRaises(ValueError):
                 inspect_sidecars({"SamplingFrequency": invalid}, channels, events)
-        with self.assertRaises(ValueError):
-            inspect_sidecars(eeg, channels, [dict(events[0], onset="-1")])
+        self.assertEqual(
+            inspect_sidecars(
+                eeg, channels, [dict(events[0], onset="-1", duration="n/a")]
+            )["events_with_unknown_duration"], 1)
         with self.assertRaises(ValueError):
             inspect_sidecars(eeg, channels, [dict(events[0], Valence="broken")])
 
@@ -128,6 +130,35 @@ class BidsMetadataQATests(unittest.TestCase):
         r = inspect_sidecars(eeg, channels, events)
         self.assertEqual(r["events_with_ratings"], 3)
         self.assertEqual(r["events_without_ratings"], 1)
+
+    def test_declared_eeg_channel_count_matches_tsv(self):
+        eeg, channels, events, *_ = sample()
+        eeg["EEGChannelCount"] = 32
+        with self.assertRaisesRegex(ValueError, "EEGChannelCount"):
+            inspect_sidecars(eeg, channels, events)
+        eeg["EEGChannelCount"] = 4
+        self.assertEqual(
+            inspect_sidecars(eeg, channels, events)["eeg_channel_count"], 4)
+
+    def test_eeg_channel_sample_rate_disagreement(self):
+        eeg, channels, events, *_ = sample()
+        channels[0]["sampling_frequency"] = "1000"
+        with self.assertRaisesRegex(ValueError, "sampling frequency mismatch"):
+            inspect_sidecars(eeg, channels, events)
+        channels[0]["sampling_frequency"] = "250"
+        self.assertEqual(inspect_sidecars(eeg, channels, events)["sample_hz"], 250)
+
+    def test_public_faced_metadata_pattern_is_blocked_without_reference(self):
+        eeg, channels, events, *_ = sample()
+        eeg.update({"EEGReference": "n/a", "EEGChannelCount": 4})
+        channels = [dict(row, units="µV") for row in channels]
+        events += [{"onset": "0", "duration": "0", "Valence": "n/a"}]
+        inspected = inspect_sidecars(eeg, channels, events)
+        self.assertIsNone(inspected["reference"])
+        self.assertEqual(inspected["events_without_ratings"], 1)
+        self.assertIn("reference_unknown", compare_metadata(
+            inspected, inspected)["reasons"])
+        self.assertFalse(inspected["analysis_ready"])
 
     def test_invalid_comparison_tolerance(self):
         a = sample()
