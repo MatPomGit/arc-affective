@@ -21,7 +21,7 @@ Reconstructing the preprocessed array's channel indexing from the two public BID
 | A2 | HEOR | Final channel relabeled `A2` in cohort 2 |
 | A1 | HEOL | Final channel relabeled `A1` in cohort 2 |
 
-Both raw-label inventories contain 32 names, 26 common and six nonmatching per cohort. **Code operations do not verify physical topology**. In particular EOG-like `HEOR/HEOL` labels versus mastoid-like `A1/A2` are clinically/anatomically nontrivial; no inference of real scalp positions follows from their software alignment. No authority of the mirror has been established by comparing it with the original Synapse `Code/` release. The original author-provided `Electrode_Location.xlsx` and Tables S2/S3 were not obtained in this review, although an online supplementary DOCX filename has been identified: `41597_2023_2650_MOESM1_ESM.docx`.
+Both raw-label inventories contain 32 names, 26 common and six nonmatching per cohort. **Four temporal channel labels remain textually different even after array reordering and tail relabeling.** Alignment is therefore by array index, not unified output channel names. **Code operations do not verify physical topology**. In particular EOG-like `HEOR/HEOL` labels versus mastoid-like `A1/A2` are clinically/anatomically nontrivial; no inference of real scalp positions follows from their software alignment. No authority of the mirror has been established by comparing it with the original Synapse `Code/` release. The original author-provided `Electrode_Location.xlsx` and Tables S2/S3 were not obtained in this review, although an online supplementary DOCX filename has been identified: `41597_2023_2650_MOESM1_ESM.docx`.
 
 ## Fail-closed source inspector
 

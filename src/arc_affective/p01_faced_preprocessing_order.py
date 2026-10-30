@@ -168,6 +168,9 @@ def candidate_index_alignment(
         "index_links": mismatches,
         "fully_aligned_postprocessing_names":
             aligned_left == aligned_right,
+        "remaining_name_mismatch_count": sum(
+            left != right for left, right in
+            zip(aligned_left, aligned_right)),
         "authoritative_code_provenance_verified": False,
         "original_electrode_table_verified": False,
         "sensor_locations_verified": False,

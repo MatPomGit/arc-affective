@@ -66,7 +66,9 @@ class FacedPreprocessedOrderTests(unittest.TestCase):
              for x in report["index_links"]],
             [("T3", "T7"), ("T4", "T8"), ("T5", "P7"),
              ("T6", "P8"), ("A2", "HEOR"), ("A1", "HEOL")])
-        self.assertTrue(report["fully_aligned_postprocessing_names"])
+        # Four temporal labels remain unequal despite index correspondence.
+        self.assertFalse(report["fully_aligned_postprocessing_names"])
+        self.assertEqual(report["remaining_name_mismatch_count"], 4)
         self.assertFalse(report["apply_to_raw_or_BIDS_allowed"])
         self.assertFalse(report["physically_equivalent"])
 
