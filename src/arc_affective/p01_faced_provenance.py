@@ -14,6 +14,13 @@ from pathlib import Path
 from .p01_bids_qc import MISSING, read_json, read_tsv
 from .p01_faced_preprocessing_order import BIDS_COHORT1, BIDS_COHORT2, BIDS_COMMIT
 
+# The pinned upstream README and code/faced.py *describe* a different
+# sampling-rate distribution from that observed in public BIDS JSON metadata.
+# This is a documentation/metadata consistency check, not verification
+# of source acquisition rates or raw EEG samples.
+PINNED_README_BLOB = "55b05cc3c3b6d92acbf216a4bc1bfa6eb66f3305"
+README_REPORTED_FREQUENCY_COUNTS = {"250": 31, "1000": 92}
+
 EXPECTED = {
     "eeg_device": "Neuracle NeuSen.W32",
     "acquisition_reference": "CPz",
@@ -121,6 +128,17 @@ def compare_cohorts(left: dict, right: dict) -> dict:
 
 
 
+def _channel_frequency_matches(value: object, expected: float) -> bool:
+    """Safely compare numeric per-channel frequency to recording rate."""
+    if type(value) not in (str, float, int):
+        return False
+    try:
+        parsed = float(value)
+    except ValueError:
+        return False
+    return math.isfinite(parsed) and parsed == expected
+
+
 def audit_recording_sample(records: list[dict]) -> dict:
     """Audit multiple local BIDS sidecar pairs, output aggregate counts only.
 
@@ -136,6 +154,7 @@ def audit_recording_sample(records: list[dict]) -> dict:
     mismatched = 0
     unexpected_frequencies = 0
     nonstandard_units = 0
+    channel_frequency_mismatch = 0
     eog_named_eeg = 0
     provenance_conflicts = Counter()
     for item in records:
@@ -166,6 +185,16 @@ def audit_recording_sample(records: list[dict]) -> dict:
         if any(row.get("units") not in ("µV", "uV")
                for row in channels if row["type"].upper() == "EEG"):
             nonstandard_units += 1
+        if (type(frequency) not in (int, float) or
+                not math.isfinite(frequency) or any(
+                    row.get("sampling_frequency") in (None, "", "n/a")
+                    or not str(row.get("sampling_frequency")).strip()
+                    or not _channel_frequency_matches(
+                        row.get("sampling_frequency"), frequency
+                    )
+                    for row in channels if row["type"].upper() == "EEG"
+                )):
+            channel_frequency_mismatch += 1
         if any(name in ("HEOR", "HEOL") for name in names):
             eog_named_eeg += 1
 
@@ -184,8 +213,19 @@ def audit_recording_sample(records: list[dict]) -> dict:
         blockers.append("unexpected_sampling_frequency")
     if nonstandard_units:
         blockers.append("nonstandard_or_missing_channel_unit")
+    if channel_frequency_mismatch:
+        blockers.append("per_channel_sampling_frequency_mismatch")
     if provenance_conflicts:
         blockers.append("source_to_derivative_metadata_conflicts")
+    distribution_comparable = (
+        complete_census and not unexpected_frequencies
+    )
+    frequency_documentation_discrepancy = (
+        distribution_comparable and
+        dict(sampling) != README_REPORTED_FREQUENCY_COUNTS
+    )
+    if frequency_documentation_discrepancy:
+        blockers.append("source_readme_vs_BIDS_frequency_count_discrepancy")
     return {
         "schema_version": 1,
         "status": "blocked_for_signal_inference",
@@ -196,9 +236,30 @@ def audit_recording_sample(records: list[dict]) -> dict:
         "cohort_2_checked": cohort_counts["2"],
         "full_123_recording_census": complete_census,
         "sampling_frequency_counts_hz": dict(sorted(sampling.items())),
+        "sampling_frequency_counts_by_cohort_hz": {
+            str(cohort): {
+                rate: sum(
+                    1 for item in records
+                    if (1 if item["subject_number"] <= 60 else 2) == cohort
+                    and item["eeg_json"].get("SamplingFrequency") == int(rate)
+                    and type(item["eeg_json"].get("SamplingFrequency")) in (int, float)
+                )
+                for rate in ("250", "1000")
+            }
+            for cohort in (1, 2)
+        },
+        "source_readme_git_blob": PINNED_README_BLOB,
+        "source_readme_reported_counts_hz": dict(
+            README_REPORTED_FREQUENCY_COUNTS
+        ),
+        "complete_census_frequency_comparison_possible":
+            distribution_comparable,
+        "source_readme_vs_BIDS_frequency_counts_disagree":
+            frequency_documentation_discrepancy,
         "unexpected_sampling_frequency_recordings": unexpected_frequencies,
         "unexpected_channel_signature_recordings": mismatched,
         "missing_or_nonstandard_unit_recordings": nonstandard_units,
+        "per_channel_frequency_mismatch_recordings": channel_frequency_mismatch,
         "eog_named_channels_typed_eeg_recordings": eog_named_eeg,
         "provenance_conflict_record_counts": dict(
             sorted(provenance_conflicts.items())

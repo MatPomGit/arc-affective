@@ -127,6 +127,7 @@ def sample(n, *, sampling=1000, cohort=None):
     eeg["SamplingFrequency"] = sampling
     for row in channels:
         row["units"] = "µV"
+        row["sampling_frequency"] = str(sampling)
     return {"subject_number": n, "eeg_json": eeg, "channels": channels}
 
 
@@ -186,6 +187,60 @@ class CohortSampleTests(unittest.TestCase):
             audit_recording_sample("sidecar")
         with self.assertRaises(ValueError):
             audit_recording_sample([sample(0)] * 124)
+
+    def test_full_public_metadata_pattern_disagrees_with_source_readme(self):
+        rows = [
+            sample(i, sampling=250 if 6 <= i <= 60 else 1000)
+            for i in range(123)
+        ]
+        result = audit_recording_sample(rows)
+        self.assertTrue(result["full_123_recording_census"])
+        self.assertEqual(result["sampling_frequency_counts_hz"],
+                         {"250": 55, "1000": 68})
+        self.assertEqual(result["source_readme_reported_counts_hz"],
+                         {"250": 31, "1000": 92})
+        self.assertTrue(
+            result["source_readme_vs_BIDS_frequency_counts_disagree"])
+        self.assertIn("source_readme_vs_BIDS_frequency_count_discrepancy",
+                      result["blockers"])
+        self.assertEqual(
+            result["sampling_frequency_counts_by_cohort_hz"],
+            {"1": {"250": 55, "1000": 6},
+             "2": {"250": 0, "1000": 62}})
+        self.assertFalse(result["analysis_ready"])
+
+    def test_full_census_matching_readme_has_no_distribution_discrepancy(self):
+        rows = [
+            sample(i, sampling=250 if i < 31 else 1000)
+            for i in range(123)
+        ]
+        result = audit_recording_sample(rows)
+        self.assertFalse(
+            result["source_readme_vs_BIDS_frequency_counts_disagree"])
+        self.assertTrue(
+            result["complete_census_frequency_comparison_possible"])
+
+    def test_partial_metadata_never_confirms_distribution_against_readme(self):
+        rows = [sample(i, sampling=250) for i in range(10)]
+        result = audit_recording_sample(rows)
+        self.assertFalse(
+            result["complete_census_frequency_comparison_possible"])
+        self.assertFalse(
+            result["source_readme_vs_BIDS_frequency_counts_disagree"])
+
+    def test_missing_or_inconsistent_per_channel_sampling_frequency_flagged(self):
+        row = sample(0)
+        row["channels"][0]["sampling_frequency"] = "250"
+        for other in row["channels"][1:]:
+            other["sampling_frequency"] = "1000"
+        result = audit_recording_sample([row])
+        self.assertEqual(result["per_channel_frequency_mismatch_recordings"], 1)
+        self.assertIn("per_channel_sampling_frequency_mismatch",
+                      result["blockers"])
+        for channel in row["channels"]:
+            channel["sampling_frequency"] = "1000"
+        okay = audit_recording_sample([row])
+        self.assertEqual(okay["per_channel_frequency_mismatch_recordings"], 0)
 
     def test_full_census_label_requires_all_123_unique_subjects(self):
         r = audit_recording_sample([sample(i) for i in range(123)])
