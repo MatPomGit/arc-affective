@@ -41,3 +41,7 @@ A substantive [IEEEtran LaTeX draft](https://github.com/MatPomGit/arc-affective/
 A runnable [synthetic-only nested LOSO evaluation](https://github.com/MatPomGit/arc-affective/blob/main/src/arc_affective/p01_evaluation.py) now includes participant-disjoint outer folds, training-only scaling, train-only prevalence and L2 logistic regression, inner subject-grouped hyperparameter selection and explicit single-class held-out handling. See [QA and limitations](https://github.com/MatPomGit/arc-affective/blob/main/reports/P01-evaluation-qa.md). This is software E0, **not** a completed EEG baseline, real corpus result or M3 evidence gate; data rights, original EEG adapters, M1 analysis freeze and empirical validation are still pending.
 
 Evaluation correction (2026-10-30): trial-averaged predictions and equal per-trial training weights address window-level pseudo-replication for trial-labelled outcomes. Final real EEG validation still requires the pre-analysis protocol, dataset and montage gates.
+
+### Participant-level uncertainty tooling (2026-10-30)
+
+[Parowany bootstrap uczestników](https://github.com/MatPomGit/arc-affective/blob/main/src/arc_affective/p01_uncertainty.py) dla prób-aggregated Brier ma osobne [QA i ograniczenia](https://github.com/MatPomGit/arc-affective/blob/main/reports/P01-statistics-qa.md). Moduł i demonstracja są wyłącznie syntetyczną walidacją E0. Brak rzeczywistych przedziałów ufności i wyniku eksperymentalnego.
