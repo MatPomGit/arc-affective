@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use the software or research artifacts from this repository, please cite the repository and any relevant published manuscript."
+title: "ARC Affective: Multimodal Affective and Cognitive State Computing"
+type: software
+authors:
+  - family-names: Pomianek
+    given-names: Mateusz
+    affiliation: Politechnika Rzeszowska
+repository-code: https://github.com/MatPomGit/arc-affective
+version: "0.1.0"
+license: Apache-2.0
