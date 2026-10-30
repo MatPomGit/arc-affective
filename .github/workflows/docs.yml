@@ -24,6 +24,8 @@ on:
       - "tests/test_p01_continuous_inference.py"
       - "tests/test_p01_faced_provenance.py"
       - "tests/test_p01_converter_qc.py"
+      - "tests/test_p01_faced_preprocessing_order.py"
+      - "src/arc_affective/p01_faced_preprocessing_order.py"
       - "src/arc_affective/p01_converter_qc.py"
       - "src/arc_affective/p01_faced_provenance.py"
       - "src/arc_affective/p01_continuous_inference.py"
@@ -58,6 +60,8 @@ on:
       - "tests/test_p01_continuous_inference.py"
       - "tests/test_p01_faced_provenance.py"
       - "tests/test_p01_converter_qc.py"
+      - "tests/test_p01_faced_preprocessing_order.py"
+      - "src/arc_affective/p01_faced_preprocessing_order.py"
       - "src/arc_affective/p01_converter_qc.py"
       - "src/arc_affective/p01_faced_provenance.py"
       - "src/arc_affective/p01_continuous_inference.py"
@@ -123,6 +127,8 @@ jobs:
         run: python -m unittest discover -s tests -p test_p01_faced_provenance.py -v
       - name: Validate P01 converter source and BDF header QA
         run: python -m unittest discover -s tests -p test_p01_converter_qc.py -v
+      - name: Validate FACED preprocessed-array channel correspondence
+        run: python -m unittest discover -s tests -p test_p01_faced_preprocessing_order.py -v
       - name: Build strict MkDocs site
         run: mkdocs build --strict
       - name: Prepare GitHub Pages
