@@ -5,7 +5,9 @@ import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from arc_affective.p01_faced_provenance import audit_recording, compare_cohorts
+from arc_affective.p01_faced_provenance import (
+    audit_recording, audit_recording_sample, compare_cohorts,
+)
 
 
 COHORT_1 = (
@@ -115,6 +117,83 @@ class FacedSourceProvenanceTests(unittest.TestCase):
         self.assertNotIn("sub-000", str(first))
         self.assertNotIn("raw_signal", first)
         self.assertFalse(first["raw_amplifier_reference_verified"])
+
+
+
+def sample(n, *, sampling=1000, cohort=None):
+    expected_cohort = 1 if n <= 60 else 2
+    names = COHORT_1 if (cohort or expected_cohort) == 1 else COHORT_2
+    eeg, channels = fixture(names)
+    eeg["SamplingFrequency"] = sampling
+    for row in channels:
+        row["units"] = "µV"
+    return {"subject_number": n, "eeg_json": eeg, "channels": channels}
+
+
+class CohortSampleTests(unittest.TestCase):
+    def test_six_realistic_source_recordings_summarized_without_identifiers(self):
+        r = audit_recording_sample([
+            sample(0), sample(30, sampling=250),
+            sample(60, sampling=250), sample(61), sample(90), sample(122),
+        ])
+        self.assertEqual(r["recordings_checked"], 6)
+        self.assertEqual((r["cohort_1_checked"], r["cohort_2_checked"]), (3, 3))
+        self.assertEqual(r["sampling_frequency_counts_hz"], {"1000": 4, "250": 2})
+        self.assertEqual(r["unexpected_channel_signature_recordings"], 0)
+        self.assertEqual(r["eog_named_channels_typed_eeg_recordings"], 3)
+        self.assertFalse(r["full_123_recording_census"])
+        self.assertFalse(r["analysis_ready"])
+        self.assertNotIn("sub-000", str(r))
+
+    def test_mislabeled_cohort_channel_order_is_detected(self):
+        r = audit_recording_sample([sample(0, cohort=2)])
+        self.assertEqual(r["unexpected_channel_signature_recordings"], 1)
+        self.assertIn("unexpected_cohort_channel_signature", r["blockers"])
+
+    def test_reordering_without_missing_channels_is_still_detected(self):
+        item = sample(0)
+        item["channels"][0], item["channels"][1] = (
+            item["channels"][1], item["channels"][0]
+        )
+        r = audit_recording_sample([item])
+        self.assertEqual(r["unexpected_channel_signature_recordings"], 1)
+
+    def test_invalid_frequency_is_blocked(self):
+        for frequency in (True, float("nan"), 125, "1000"):
+            with self.subTest(frequency=frequency):
+                r = audit_recording_sample([sample(0, sampling=frequency)])
+                self.assertEqual(r["unexpected_sampling_frequency_recordings"], 1)
+
+    def test_missing_units_are_flagged(self):
+        item = sample(61)
+        item["channels"][0]["units"] = "n/a"
+        r = audit_recording_sample([item])
+        self.assertEqual(r["missing_or_nonstandard_unit_recordings"], 1)
+
+    def test_duplicate_or_out_of_range_subject_numbers_rejected(self):
+        for data in ([sample(0), sample(0)], [sample(-1)],
+                     [sample(123)], [sample(True)]):
+            with self.subTest(case=str([x["subject_number"] for x in data])):
+                with self.assertRaises(ValueError):
+                    audit_recording_sample(data)
+
+    def test_malformed_or_empty_input_rejected(self):
+        with self.assertRaises(ValueError):
+            audit_recording_sample([])
+        with self.assertRaises(ValueError):
+            audit_recording_sample([{"subject_number": 0}])
+        with self.assertRaises(ValueError):
+            audit_recording_sample("sidecar")
+        with self.assertRaises(ValueError):
+            audit_recording_sample([sample(0)] * 124)
+
+    def test_full_census_label_requires_all_123_unique_subjects(self):
+        r = audit_recording_sample([sample(i) for i in range(123)])
+        self.assertTrue(r["full_123_recording_census"])
+        self.assertEqual(r["recordings_checked"], 123)
+        self.assertEqual((r["cohort_1_checked"], r["cohort_2_checked"]), (61, 62))
+        self.assertFalse(r["actual_montage_verified"])
+        self.assertFalse(r["analysis_ready"])
 
 
 if __name__ == "__main__":
