@@ -51,3 +51,22 @@ The [read-only source-rate comparison tool](https://github.com/MatPomGit/arc-aff
 ## Stimulus identity challenge, prospective revision (2026-10-30)
 
 Gerster et al. (bioRxiv preprint 2026, DOI [10.64898/2026.06.12.731889](https://doi.org/10.64898/2026.06.12.731889)) demonstrate a major stimulus-identity confound in FACED classification using target emotion categories. See the [preplanned software controls and study-scope distinction](https://github.com/MatPomGit/arc-affective/blob/main/reports/P01-stimulus-confound-qa.md). FACED videos recur between participants, so a **participant-LOSO fold does NOT leave clips unseen**. If a FACED analysis becomes admissible, include a **train-only film-mean self-report baseline** under participant LOSO, an appropriately prespecified jointly participant-and-video-disjoint analysis or independent new-video cohort, and separate all three estimands in figures/tables. A single participant×film test trial cannot yield CCC. For categorical stimulus-assigned labels, leave-film-out may render an emotion class absent from training; report that task as not estimable. The new diagnostic is E0 synthetic-only, not an EEG finding; target choice and inferential design remain **DRAFT**.
+
+## Multi-film joint holdout, still prospective (2026-10-30)
+
+To address the CCC-not-defined limitation of single-film subject×stimulus
+intersection tests, the [synthetic blocked-fold QA](https://github.com/MatPomGit/arc-affective/blob/main/reports/P01-stimulus-confound-qa.md)
+supports externally prespecified **blocks of at least two films** and
+holds out a participant and an entire film block together. Other people
+watching held-out films, and the held-out person watching other films,
+are excluded from model fitting and all train-only transforms.
+The held-out participant then contributes multiple independently rated
+test films; CCC is computable only if their true ratings vary. A 28-film,
+seven-block-of-four example is **illustrative, not an approved or frozen
+choice**. Block assignment cannot use emotion labels or outcome-driven
+test scores, must document missing participant–film cells and ensure
+adequate training representation. All joint folds share training people
+and films, so descriptive fold MSE/CCC does not yield population
+confidence intervals without a separately justified inference method.
+The participant-only LOSO design estimates a different outcome and is
+retained as a separate analysis. **M1 remains DRAFT**.

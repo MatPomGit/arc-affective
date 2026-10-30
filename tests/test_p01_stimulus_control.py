@@ -7,7 +7,8 @@ import unittest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from arc_affective.p01_stimulus_control import (
-    StimulusTrial, audit_stimulus_confound, joint_disjoint_splits,
+    StimulusTrial, audit_blocked_stimulus_control, audit_stimulus_confound,
+    blocked_joint_disjoint_splits, joint_disjoint_splits,
     participant_splits, synthetic_fixture, validate_trials,
 )
 
@@ -149,6 +150,141 @@ class StimulusControlTests(unittest.TestCase):
         self.assertEqual(result["mean_cross_cell_rows_excluded"], 7)
         self.assertTrue(result["single_trial_per_intersection"])
         self.assertFalse(result["ccc_defined_per_intersection"])
+
+
+
+def film_blocks(n=8, size=4):
+    return [
+        tuple(f"synthetic-film{i:02d}" for i in range(start, start + size))
+        for start in range(0, n, size)
+    ]
+
+
+class BlockedStimulusTests(unittest.TestCase):
+    def setUp(self):
+        self.rows = synthetic_fixture(participants=5, clips=8)
+        self.blocks = film_blocks()
+
+    def test_rectangular_complement_has_no_subject_or_film_leakage(self):
+        partitions = list(blocked_joint_disjoint_splits(
+            self.rows, self.blocks))
+        self.assertEqual(len(partitions), 10)
+        covered = []
+        for train_i, test_i, excluded_i in partitions:
+            self.assertEqual((len(train_i), len(test_i),
+                              len(excluded_i)), (16, 4, 20))
+            self.assertEqual(
+                set(train_i) | set(test_i) | set(excluded_i),
+                set(range(40)))
+            self.assertFalse(set(train_i) & set(test_i))
+            self.assertFalse(set(train_i) & set(excluded_i))
+            self.assertFalse(set(test_i) & set(excluded_i))
+            train, test = ([self.rows[i] for i in group]
+                           for group in (train_i, test_i))
+            self.assertTrue({r.participant for r in train}.isdisjoint(
+                {r.participant for r in test}))
+            self.assertTrue({r.stimulus for r in train}.isdisjoint(
+                {r.stimulus for r in test}))
+            covered.extend(test_i)
+        self.assertEqual(sorted(covered), list(range(40)))
+
+    def test_multi_film_folds_make_ccc_mathematically_evaluable(self):
+        report = audit_blocked_stimulus_control(self.rows, self.blocks)
+        self.assertEqual(report["fold_count"], 10)
+        self.assertEqual(report["min_test_trials_per_fold"], 4)
+        self.assertEqual(report["max_test_trials_per_fold"], 4)
+        self.assertEqual(
+            report["ccc_mathematically_defined_folds_for_constant_prior"], 10)
+        self.assertEqual(report["ccc_undefined_folds_for_constant_prior"], 0)
+        self.assertEqual(report["test_trials_total"], 40)
+        self.assertTrue(report["each_trial_tested_exactly_once"])
+        self.assertFalse(report["fold_scores_independent_for_inference"])
+        self.assertIsNone(report["confidence_interval"])
+
+    def test_constant_subject_ratings_report_undefined_ccc(self):
+        rows = list(self.rows)
+        for i, row in enumerate(rows):
+            if (row.participant == "synthetic-p00" and
+                    row.stimulus in self.blocks[0]):
+                rows[i] = replace(row, valence=4.0)
+        report = audit_blocked_stimulus_control(rows, self.blocks)
+        self.assertEqual(report["ccc_undefined_folds_for_constant_prior"], 1)
+        self.assertEqual(
+            report["ccc_mathematically_defined_folds_for_constant_prior"], 9)
+
+    def test_28_video_facedsized_example_is_not_a_frozen_partition(self):
+        rows = synthetic_fixture(participants=4, clips=28)
+        blocks = film_blocks(28, 4)
+        report = audit_blocked_stimulus_control(rows, blocks)
+        self.assertEqual(report["film_block_count"], 7)
+        self.assertEqual(report["fold_count"], 28)
+        self.assertEqual(report["test_trials_total"], 112)
+        self.assertFalse(report["protocol_frozen"])
+        self.assertFalse(report["real_eeg_used"])
+
+    def test_noncontiguous_block_ids_accepted_without_label_selection(self):
+        blocks = [
+            ("synthetic-film00", "synthetic-film02", "synthetic-film04",
+             "synthetic-film06"),
+            ("synthetic-film01", "synthetic-film03", "synthetic-film05",
+             "synthetic-film07"),
+        ]
+        report = audit_blocked_stimulus_control(self.rows, blocks)
+        self.assertEqual(report["fold_count"], 10)
+        self.assertTrue(report["block_assignment_outcome_free"])
+
+    def test_partial_subject_film_block_allowed_only_with_two_trials(self):
+        rows = [r for r in self.rows
+                if not (r.participant == "synthetic-p00"
+                        and r.stimulus == "synthetic-film01")]
+        report = audit_blocked_stimulus_control(rows, self.blocks)
+        self.assertEqual(report["test_trials_total"], 39)
+        self.assertEqual(report["min_test_trials_per_fold"], 3)
+
+        missing = [r for r in rows
+                   if not (r.participant == "synthetic-p00" and
+                           r.stimulus in ("synthetic-film02",
+                                         "synthetic-film03"))]
+        with self.assertRaisesRegex(ValueError, "two independent ratings"):
+            list(blocked_joint_disjoint_splits(missing, self.blocks))
+
+    def test_overlap_unknown_omission_singletons_and_duplicates_rejected(self):
+        malformed = [
+            [],
+            [self.blocks[0]],
+            [self.blocks[0], self.blocks[0]],
+            [self.blocks[0], self.blocks[1][:-1]],
+            [self.blocks[0], (*self.blocks[1], "unknown")],
+            [self.blocks[0], (self.blocks[1][0],)],
+            [("synthetic-film00", "synthetic-film00"), self.blocks[1]],
+            ["synthetic-film00", self.blocks[1]],
+            [[*self.blocks[0], None], self.blocks[1]],
+        ]
+        for bad in malformed:
+            with self.subTest(bad=str(bad)), self.assertRaises(ValueError):
+                list(blocked_joint_disjoint_splits(self.rows, bad))
+
+    def test_block_assignment_remains_fixed_when_heldout_valence_changes(self):
+        from arc_affective.p01_stimulus_control import _train_mean
+        train_i, test_i, excluded_i = next(
+            blocked_joint_disjoint_splits(self.rows, self.blocks))
+        old_train_mean = _train_mean([self.rows[i] for i in train_i])
+        adjusted = list(self.rows)
+        for i in test_i:
+            adjusted[i] = replace(adjusted[i], valence=7 - adjusted[i].valence)
+        revised = next(blocked_joint_disjoint_splits(adjusted, self.blocks))
+        self.assertEqual((train_i, test_i, excluded_i), revised)
+        self.assertEqual(
+            _train_mean([adjusted[i] for i in train_i]), old_train_mean)
+
+    def test_aggregate_does_not_export_subject_or_film_identifiers(self):
+        report = audit_blocked_stimulus_control(self.rows, self.blocks)
+        self.assertNotIn("synthetic-p", str(report))
+        self.assertNotIn("synthetic-film", str(report))
+        self.assertFalse(report["participant_ids_exported"])
+        self.assertFalse(report["stimulus_ids_exported"])
+        self.assertFalse(report["confirmatory_inference_authorized"])
+        self.assertFalse(report["model_input_eeg"])
 
 
 if __name__ == "__main__":
