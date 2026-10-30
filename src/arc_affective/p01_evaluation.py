@@ -148,7 +148,7 @@ def balanced_accuracy(labels: Sequence[int], probabilities: Sequence[float]):
     if not {0, 1}.issubset(set(labels)):
         return None
     return sum(
-        sum((p >= 0.5) == (y == cls)
+        sum((int(p >= 0.5) == cls)
             for y, p in zip(labels, probabilities) if y == cls)
         / sum(y == cls for y in labels)
         for cls in (0, 1)
