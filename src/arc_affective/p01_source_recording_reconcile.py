@@ -19,7 +19,10 @@ from .p01_faced_provenance import README_REPORTED_FREQUENCY_COUNTS
 
 # Directly checked from all 123 _eeg.json files at immutable NEMAR commit.
 # This is a versioned metadata expectation, not original BDF sample evidence.
-PINNED_BIDS_250_SUBJECTS = frozenset(range(6, 61))
+# The two 250-Hz recordings 004/005 precede two 1000-Hz recordings
+# 006/007. Aggregate 55/68 counts alone cannot validate subject alignment.
+# Pinned textual EEG JSON sidecars read at the exact BIDS_COMMIT above.
+PINNED_BIDS_250_SUBJECTS = frozenset({4, 5}) | frozenset(range(8, 61))
 EXPECTED_IDS = frozenset(range(123))
 REQUIRED_COLUMNS = frozenset({"sub", "Sample_rate", "Unit"})
 MAX_SOURCE_CSV_BYTES = 1024 * 1024

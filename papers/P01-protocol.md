@@ -70,3 +70,15 @@ and films, so descriptive fold MSE/CCC does not yield population
 confidence intervals without a separately justified inference method.
 The participant-only LOSO design estimates a different outcome and is
 retained as a separate analysis. **M1 remains DRAFT**.
+
+## Source-recording rate alignment correction (2026-10-30)
+
+The earlier offline `Recording_info.csv` comparison utility had an
+incorrect per-subject assumption despite correct overall counts.
+At pinned NEMAR commit `2577b0b...`, 250-Hz BIDS metadata belong to
+`sub-004`, `sub-005` and `sub-008` through `sub-060`;
+`sub-006` and `sub-007` are **1000 Hz**. The
+[source-rate reconciliation QA](https://github.com/MatPomGit/arc-affective/blob/main/reports/P01-source-recording-qa.md)
+and regression tests now reflect these record-level facts. The original
+source CSV has still not been read, and neither source acquisition rates
+nor real signal calibration are certified.

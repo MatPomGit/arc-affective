@@ -35,6 +35,38 @@ class SourceCsvReconciliationTests(unittest.TestCase):
         self.assertFalse(result["analysis_ready"])
         self.assertFalse(result["raw_BDF_headers_verified"])
 
+    def test_pinned_recording_rates_not_inferred_from_cohort_range(self):
+        # Real, public BIDS JSON sidecars at pinned NEMAR commit:
+        # 000-003 = 1000; 004-005 = 250; 006-007 = 1000;
+        # 008-060 = 250; 061-122 = 1000.
+        self.assertEqual(len(PINNED_BIDS_250_SUBJECTS), 55)
+        self.assertEqual(
+            set(PINNED_BIDS_250_SUBJECTS),
+            {4, 5} | set(range(8, 61)))
+        self.assertNotIn(6, PINNED_BIDS_250_SUBJECTS)
+        self.assertNotIn(7, PINNED_BIDS_250_SUBJECTS)
+
+    def test_partial_csv_exact_boundary_record_alignment(self):
+        # Aggregate rates would remain 55/68 under the previous WRONG
+        # contiguous mapping; compare records, not just count totals.
+        records = fixture(subjects=[4, 5, 6, 7])
+        result = reconcile_recording_info(records)
+        self.assertEqual(result["source_csv_rows"], 4)
+        self.assertEqual(
+            result["source_csv_to_pinned_BIDS_frequency_mismatch_count"], 0)
+        self.assertFalse(result["complete_source_csv_census"])
+
+        inverted = fixture({4: 1000, 6: 250}, subjects=[4, 5, 6, 7])
+        mismatched = reconcile_recording_info(inverted)
+        self.assertEqual(
+            mismatched["source_csv_to_pinned_BIDS_frequency_mismatch_count"],
+            2)
+        self.assertEqual(
+            mismatched["frequency_mismatch_directions"],
+            {"source_250_bids_1000": 1, "source_1000_bids_250": 1})
+        self.assertFalse(
+            mismatched["source_csv_vs_README_global_counts_disagree"])
+
     def test_source_matching_readme_still_disagrees_with_bids(self):
         rates = {i: 250 if i < 31 else 1000 for i in range(123)}
         result = reconcile_recording_info(fixture(rates))
