@@ -1,0 +1,7 @@
+\section{Discussion and Threats to Validity}
+A synthetic stream can test queue discipline and accounting but cannot establish sensor latency, tracking quality or model accuracy. Software-injected service times do not replicate actual GPU/CPU inference, PCIe transfer or vendor SDK behavior. Cross-device timestamps are not comparable solely because both are expressed as nanoseconds. Runtime frequency scaling, OS scheduling and background tasks introduce additional uncertainty.
+
+The broader scheduling literature includes deadline and adaptive stream controllers \cite{nigade2024,sedlak2025,dynamicbatch2024}; a new paper requires a measurable differentiated mechanism and controlled comparison against these baselines. If no improvement survives real-node replication, report that outcome and narrow the engineering claim rather than retroactively selecting a different primary metric.
+
+\section{Conclusion}
+This methods-stage manuscript defines an auditable performance and quality trade-off for multimodal edge scheduling under faults. Publication readiness depends on a frozen protocol, real-clock evaluation on actual hardware, comparative implementation and independent reproducibility.

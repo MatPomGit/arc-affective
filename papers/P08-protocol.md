@@ -1,0 +1,15 @@
+# P08 — candidate real-clock evaluation protocol v0.1.0 (2026-10-30)
+
+**Status: DRAFT, NOT preregistered or frozen.** The actual host capacity, matrix, fallback feasibility and primary endpoint must be signed off at #29, following novelty audit #21. [Manuscript](https://github.com/MatPomGit/arc-affective/blob/main/manuscripts/P08/main.tex).
+
+**Estimand:** difference between policies in on-time valid outputs / all attempted input events during paired identical fault scripts. Report conditional latency distribution and all loss counts to prevent latency-by-dropping illusions. Distinguish scheduled generation, observed arrival, dispatch and completion; use one monotonic clock per host and do not combine unaligned sensor clock domains.
+
+**Candidate matrix (not yet frozen):** synthetic per-source arrival rates 10/30/60 Hz; load ratios 0.5/0.9/1.2/1.8 after actual service-rate calibration; queue bounds 1/4/16; deadlines 33/100/250 ms; FIFO, latest-only, bounded FIFO, proposed quality/deadline-aware admission. Faults: disappearance, reconnect burst, delayed events, duplicates/reordering, corrupted quality flags, and clock-offset/drift. Repeated independent seeds (target >=20 traces/scenario subject to cost), cold and warm conditions separately. Start with one physical existing node, add Raspberry Pi 5 only after host readiness.
+
+**Acceptance and uncertainty:** log all ingress, invalid, dropped, evicted, processed and on-time counts; verify accounting identity. Report p50/p95/p99 end-to-end monotonic latency, deadline miss, goodput, queue occupancy, freshness, CPU/RSS, event counts, exact code version, host OS and seed. Use run-level paired differences and CIs, not per-frame independence. Do not call synthetic service sleeps neural inference.
+
+**Go/no-go:** software-only replay or simulation is engineering preparation, not real sensor latency evidence. No new scheduling novelty until compared with adaptive and deadline-aware approaches such as [Nigade et al. 2024](https://doi.org/10.1007/s11241-024-09418-4), [Sedlak et al. 2025](https://doi.org/10.1007/s12530-025-09753-2), and [Dynamic Batching / Early-Exiting 2024](https://doi.org/10.1109/VTC2024-Spring62846.2024.10682995). Keep blocked consumer gaze/EEG streams disabled; instrument legitimate metadata only.
+
+## Implemented E0 precursor (2026-10-30)
+
+The [synthetic replay source](https://github.com/MatPomGit/arc-affective/blob/main/src/arc_affective/p08_benchmark.py) and [P08 implementation evidence](https://github.com/MatPomGit/arc-affective/blob/main/reports/P08-data-qa.md) contain deterministic, virtual-time queue comparisons only. No measured p95/p99, physical node data or original scheduler performance is claimed. M2 #41 stays open until measured real-clock integration and repeatability evidence are available.

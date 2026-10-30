@@ -1,0 +1,22 @@
+\documentclass[conference]{IEEEtran}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,booktabs}
+\usepackage[hidelinks]{hyperref}
+\title{Deadline-Aware Multimodal Stream Scheduling Under Sensor Faults on Edge Nodes}
+\author{\IEEEauthorblockN{Author information to be confirmed}\IEEEauthorblockA{Institutional affiliation to be confirmed}}
+\begin{document}
+\maketitle
+\begin{abstract}
+Time-sensitive multimodal inference must balance output freshness, tail latency, throughput and sensor reliability under finite resources. This manuscript specifies a reproducible edge benchmark that compares FIFO, latest-sample, bounded-queue and a proposed quality- and deadline-aware scheduler with explicit drop accounting. Real-clock measurements, repeatability and physical-node profiling are required to establish its engineering value. The evaluation isolates queueing effects from the predictive accuracy of affect recognition. This is a preregistration-stage draft; no real-node benchmarks, improvements or sensor-inference claims have yet been established.
+\end{abstract}
+\begin{IEEEkeywords}
+edge computing, real-time streams, backpressure, deadlines, missingness
+\end{IEEEkeywords}
+\input{sections/introduction}
+\input{sections/methods}
+\input{sections/results}
+\input{sections/discussion}
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+\end{document}

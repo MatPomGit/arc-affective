@@ -10,6 +10,11 @@ on:
       - "requirements-docs.txt"
       - "scripts/sync_mkdocs.py"
       - "tests/test_docs.py"
+      - "tests/test_manuscripts.py"
+      - "tests/test_p08_benchmark.py"
+      - "tests/test_p01_registry.py"
+      - "src/arc_affective/p01_registry.py"
+      - "src/arc_affective/p08_benchmark.py"
       - ".github/workflows/docs.yml"
   pull_request:
     paths:
@@ -19,6 +24,11 @@ on:
       - "requirements-docs.txt"
       - "scripts/sync_mkdocs.py"
       - "tests/test_docs.py"
+      - "tests/test_manuscripts.py"
+      - "tests/test_p08_benchmark.py"
+      - "tests/test_p01_registry.py"
+      - "src/arc_affective/p01_registry.py"
+      - "src/arc_affective/p08_benchmark.py"
       - ".github/workflows/docs.yml"
   workflow_dispatch:
 
@@ -49,6 +59,12 @@ jobs:
         run: python scripts/sync_mkdocs.py
       - name: Validate documentation registry and local links
         run: python -m unittest discover -s tests -p 'test_docs.py' -v
+      - name: Validate IEEE manuscript sources (offline)
+        run: python -m unittest discover -s tests -p test_manuscripts.py -v
+      - name: Validate P08 synthetic benchmark invariants
+        run: python -m unittest discover -s tests -p test_p08_benchmark.py -v
+      - name: Validate P01 EEG metadata manifest gate
+        run: python -m unittest discover -s tests -p test_p01_registry.py -v
       - name: Build strict MkDocs site
         run: mkdocs build --strict
       - name: Prepare GitHub Pages

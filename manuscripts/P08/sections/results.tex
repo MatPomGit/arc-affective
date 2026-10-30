@@ -1,0 +1,19 @@
+\section{Results: Reporting Plan}
+\textbf{There are no empirical benchmark results in this draft.} Results will not be inferred from the synthetic event generator.
+
+\begin{table}[htbp]
+\caption{Required policy comparison on a specified physical node (not yet measured)}
+\centering
+\begin{tabular}{llll}
+\toprule
+Policy & Goodput & p99 (ms) & Drop fraction\\
+\midrule
+FIFO & Pending & Pending & Pending\\
+Latest-only & Pending & Pending & Pending\\
+Bounded FIFO & Pending & Pending & Pending\\
+Quality/deadline-aware & Not implemented & Pending & Pending\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A completed evidence package will include a hardware manifest, exact run commands, warm-up policy, workload trace and checksum, outcome counts, deadline compliance, percentile definition, run-to-run intervals and fault timelines. CPU-fallback comparisons will be isolated by workload and machine configuration.

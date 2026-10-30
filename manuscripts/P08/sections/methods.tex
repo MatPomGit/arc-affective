@@ -1,0 +1,21 @@
+\section{Benchmark Design}
+\subsection{Time semantics and event accounting}
+Each input event $i$ has modality $m_i$, scheduled generation time $g_i$, observed monotonic arrival $a_i$, quality indicator $q_i$ and an optional independently defined timestamp uncertainty $u_i$. The scheduler records dispatch time $s_i$ and monotonic completion time $c_i$. Report latency $L_i=c_i-a_i$, separately from scheduled-event age $A_i=c_i-g_i$ when clocks are proven comparable. If event timestamps originate from unrelated hardware clocks, estimate offset and drift before calculating cross-device age; otherwise record it as unavailable.
+
+Every attempted input must terminate in exactly one accountable category: processed, explicitly dropped at admission, evicted, or invalid. Duplicates and reordering are counted separately. A processed result is timely when $L_i \le D_i$, where $D_i$ is the preregistered modality deadline. Record processing-time and queue-time distributions to distinguish scheduling from inference cost.
+
+\subsection{Baselines and proposed method}
+Baselines are unbounded FIFO (guarded by a finite emergency cap), latest-only per modality, bounded FIFO and fixed batch size where applicable. All policies receive identical arrival traces and fixed service-cost profiles. The proposed method is quality- and deadline-aware admission combined with staleness eviction and an independently measured CPU fallback. Its final selection rule must be specified and frozen before held-out comparison; benchmark code that merely measures baseline FIFO is not evidence of the proposed algorithm.
+
+\subsection{Scenarios and physical execution}
+Planned modality classes are camera metadata, hand-tracking metadata and application events, with acoustic summaries only after legal channel verification. Synthetic streams represent event scheduling, \emph{not} sensor physics. Candidate rates are $10$, $30$ and $60$ events/s per synthetic source; service utilization targets $0.5$, $0.9$, $1.2$ and $1.8$ relative to observed service capacity. Candidate queue limits are $1$, $4$ and $16$ records. Deadline candidates are $33$, $100$ and $250$ ms. These are pre-analysis design values subject to M1 freeze on actual existing nodes, not measured operating points.
+
+Fault scripts will include single-modality dropout, a reconnect burst, a delayed modality, clock drift and corrupted quality flags. Fault ordering, durations and seeds must be checked into the benchmark manifest. Run at least 20 independent seed traces per defined configuration if run-time cost permits, with separate cold and warmed states. Record the actual physical host, OS, CPU/GPU, software versions and power mode. A Raspberry Pi 5 is a candidate second node, not a completed benchmark.
+
+\subsection{Primary endpoint, secondary outcomes and comparison}
+The primary outcome is the proportion of attempted input events yielding an on-time, valid output (goodput). The paired policy difference in goodput under fault injection is computed on identical seeded workload profiles and repeated independently on actual hardware. Secondary outcomes include p50/p95/p99 of $L_i$ (processed events only, conditional on completion), unconditional miss fraction, drop/eviction fraction, duplicate handling, freshness quantiles, CPU and peak RSS; measured electrical energy is optional. Tail latency alone can improve by discarding most work and therefore must never be reported without goodput and drop accounting.
+
+Compare policies using paired seed-level differences, cluster by physical execution run and supply intervals that reflect independent runs. No event- or frame-level pseudo-replication is permitted. For multiple scenarios report all predefined cells, not the best selected subset. The main claim is rejected if improved conditional p99 is accompanied by a material goodput collapse or if all observed gains occur only in synthetic time.
+
+\subsection{Privacy, rights and validity}
+Synthetic data and non-identifying system metadata require no human subject. Real RGB, Leap or audio acquisition is separately permission- and ethics-gated; Tobii Eye Tracker 5 raw research collection and Muse S Athena raw collection remain blocked under current project conditions. Never persist identifying recordings in the repository. Simulation and real-clock tests must be labelled separately.

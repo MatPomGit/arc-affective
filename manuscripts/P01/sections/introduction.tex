@@ -1,0 +1,10 @@
+\section{Introduction}
+Low-electrode-count EEG systems reduce acquisition and deployment burden, yet they do not necessarily preserve information acquired by research-grade montages. Apparent emotion-decoding accuracy can arise from stable participant or recording signatures rather than transferable affect-related information. A recent analysis of DEAP and DREAMER found substantial performance reductions after enforcing participant independence \cite{pandilova2026}. These results motivate evaluation at the participant level rather than treating overlapping EEG windows as independent observations.
+
+Prior work has addressed transfer between subjects, sessions and datasets \cite{review2024,crossadapt2025}. More specifically, consumer-grade, cross-dataset EEG studies already compare feature engineering and neural methods \cite{consumer2025}. Consequently, sparse-channel decoding or EEG domain adaptation alone cannot constitute a credible novelty claim.
+
+\textbf{Research question:} how much predictive utility and calibration are lost when an EEG model is transferred across participants and acquisition domains while reducing the available electrode set, after separating changes in channel count from changes in electrode position and reference?
+
+The proposed differentiator is a factorial \emph{measurement compatibility} audit: (i) legal access and physical electrode correspondence, (ii) reference and label compatibility, (iii) subject-disjoint versus domain-held-out evaluation and (iv) calibration, including failures and negative controls. The intent is to quantify limits and failure modes, not to claim equivalence with a particular consumer headset.
+
+\textbf{Scope and contribution status.} This is a planned benchmark protocol and a manuscript draft. Its technical contribution and novelty must be evaluated against the cited studies with actual reproduced baselines before any publication claim. No new human participants are needed; the candidate datasets contain existing recordings subject to their own reuse conditions.
