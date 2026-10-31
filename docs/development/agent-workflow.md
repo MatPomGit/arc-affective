@@ -1,6 +1,6 @@
 # Uzupełniający cykl pracy agentów ARC Affective
 
-**Wersja:** 1.0.0 (2026-10-31). Odczytaj także [AGENTS.md](../../AGENTS.md) i [procedurę Issues](../issue-operating-procedure.md); niniejszy dokument nie zastępuje ich warunków.
+**Wersja:** 1.0.0 (2026-10-31). Odczytaj także root `AGENTS.md` i [procedurę Issues](../issue-operating-procedure.md); niniejszy dokument nie zastępuje ich warunków.
 
 ## Rozpoznanie i dobór zadania
 Sprawdź źródłowy main, aktualne Issues, milestone, PR, właściciela, rezerwacje i stan z dowodami. Najpierw zamykaj naprawy i istniejące PR. DoR: cel, wynik, zależności, kryteria, prawa do danych, potrzebne zasoby i bramki naukowe. Wybierz jeden JUMP i odnotuj rezerwację w istniejącym kontrolerze Research Autopilot. Nie zakładaj dodatkowego schedulera. Limit: jeden feature PR na repozytorium i pięć w zarządzanym portfolio.
