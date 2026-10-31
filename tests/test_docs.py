@@ -42,7 +42,7 @@ class DocumentationTests(unittest.TestCase):
         config = (ROOT / "mkdocs.yml").read_text(encoding="utf-8")
         # All site Markdown nav entries are indented scalar paths.
         targets = re.findall(r"^\s+-\s+[^\n:]+:\s+([\w./-]+\.md)\s*$", config, re.MULTILINE)
-        self.assertEqual(len(targets), 25, "Expected all navigation pages")
+        self.assertEqual(len(targets), 26, "Expected all navigation pages")
         for item in targets:
             with self.subTest(page=item):
                 self.assertTrue((ROOT / "docs" / item).is_file())

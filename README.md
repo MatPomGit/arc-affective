@@ -72,3 +72,5 @@ Synthetic events are not physiological data or a trained affect estimator. They 
 ## Governance
 
 Work through issues and focused PRs. Run the offline tests before merge. Do not launch GitHub-hosted paid compute or train on sensitive data by default. Human-subject protocols require institutional ethics/privacy assessment before collection, including an N-of-1 study.
+
+Zasady autonomii: [AGENTS.md](AGENTS.md), [procedura agentów](docs/development/agent-workflow.md).
