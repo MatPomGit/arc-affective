@@ -118,3 +118,6 @@ Keep the homepage updated **after each accepted publication milestone or materia
 ## 10. Definition of done: non-negotiable evidence
 
 A task is **done** only when its declared deliverable exists and behaves as required; applicable tests and scientific/ethical gates pass; its exact commit and reproducibility evidence are linked; the change is merged and **deployed if relevant**; documentation and Issue checklists reflect reality; and worktrees/branches are cleaned up. If any requirement is unmet, report `blocked` or `partially verified`, identify the next step and continue independent work without unnecessary user interruption.
+
+## Procedura operacyjna i skille (2026-10-31)
+- Przed autonomicznym JUMP, rezerwacją Issues, doborem skilli, review, testowaniem exact-SHA i cleanup czytaj [projektowy cykl agentów](docs/development/agent-workflow.md). Nie zastępuje istniejących szczegółowych bramek naukowych, danych i uprawnień.
