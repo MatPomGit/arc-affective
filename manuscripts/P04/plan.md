@@ -30,4 +30,4 @@ Verify all frame persistence disabled in default path, scientifically meaningful
 - [ ] 4. Audit privacy and write P04.
 
 ## Status
-**PLANNED — no measurements, experiments or publication claims completed.** Follow [methods](../docs/methodology.md), [privacy](../docs/governance.md), [hardware limits](../docs/hardware.md), and [portfolio boundaries](../docs/portfolio.md).
+**PLANNED — no measurements, experiments or publication claims completed.** Follow [methods](../../docs/methodology.md), [privacy](../../docs/governance.md), [hardware limits](../../docs/hardware.md), and [portfolio boundaries](../../docs/portfolio.md).

@@ -2,10 +2,10 @@
 
 ## Architektura dokumentacji
 
-- **Pliki źródłowe:** `docs/*.md` oraz `papers/P*.md`.
+- **Pliki źródłowe:** `docs/*.md` oraz `manuscripts/Pxx/plan.md`.
 - **Główna konfiguracja:** `mkdocs.yml`, motyw Material for MkDocs.
-- **Generator:** `scripts/sync_mkdocs.py` włącza istniejące protokoły `papers/` do witryny, przenosząc względne linki. Nie modyfikuje oryginałów.
-- **Katalog przejściowy:** `docs/papers/` jest generowany i ignorowany przez Git.
+- **Generator:** `scripts/sync_mkdocs.py` włącza istniejące plany z `manuscripts/Pxx/plan.md` do witryny, przenosząc względne linki. Nie modyfikuje oryginałów.
+- **Katalog przejściowy:** `docs/papers/` jest generowany (zachowuje dotychczasowe adresy stron) i ignorowany przez Git.
 - **Wynik:** `site/` jest generowany, ignorowany przez Git, a publikowany jako artefakt Pages.
 - **Automatyzacja:** `.github/workflows/docs.yml`: test kompilacji na PR i wdrożenie po zmianach `main`.
 
@@ -60,7 +60,7 @@ Nie przenoś tej konfiguracji bez audytu do prywatnego repozytorium ani na płat
 
 ## Edycja treści
 
-1. Zmieniaj protokoły **wyłącznie** w `papers/Pxx-*.md`, nigdy ręcznie w `docs/papers/`.
+1. Zmieniaj protokoły **wyłącznie** w `manuscripts/Pxx/plan.md`, nigdy ręcznie w `docs/papers/`.
 2. Zmieniaj pozostałe dokumenty bezpośrednio w `docs/`.
 3. Aktualizując nawigację, edytuj `mkdocs.yml`; przy zmianach nazw plików aktualizuj `scripts/sync_mkdocs.py`.
 4. Przed PR uruchom generator, testy i `mkdocs build --strict`. Nie commituj `site/` ani `docs/papers/`.

@@ -55,7 +55,7 @@ class ManuscriptTests(unittest.TestCase):
                 self.assertIn("empirical", results.lower())
                 self.assertIn("Pending", results)
                 protocol = (
-                    ROOT / "papers" / f"{paper}-protocol.md"
+                    ROOT / "manuscripts" / paper / "protocol.md"
                 ).read_text(encoding="utf-8")
                 self.assertIn("NOT preregistered", protocol)
 

@@ -45,4 +45,4 @@ Version 1.0.0 · 2026-10-29
 | G4 ready for independent review/venue | M6 | Manuscript, disclosures, figures, scripts and reproducibility manifest |
 
 ## Versioning and issues
-Use SemVer for actual released code (not aspirational milestone completions) and date all protocol/manuscript exports. Paper source lives in `papers/`; ephemeral raw data in ignored local `data/`; derived non-identifying results can be committed only when rights allow. All images/plots have axes, units, source and cited method.
+Use SemVer for actual released code (not aspirational milestone completions) and date all protocol/manuscript exports. Paper source lives in `manuscripts/Pxx/`; ephemeral raw data in ignored local `data/`; derived non-identifying results can be committed only when rights allow. All images/plots have axes, units, source and cited method.

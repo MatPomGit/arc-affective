@@ -30,4 +30,4 @@ G0 must confirm licensed paired synchronized streams. Otherwise change dataset/c
 - [ ] 4. Independent reproducibility and manuscript package.
 
 ## Status
-**PLANNED — no measurements, experiments or publication claims completed.** Follow [methods](../docs/methodology.md), [privacy](../docs/governance.md), [hardware limits](../docs/hardware.md), and [portfolio boundaries](../docs/portfolio.md).
+**PLANNED — no measurements, experiments or publication claims completed.** Follow [methods](../../docs/methodology.md), [privacy](../../docs/governance.md), [hardware limits](../../docs/hardware.md), and [portfolio boundaries](../../docs/portfolio.md).

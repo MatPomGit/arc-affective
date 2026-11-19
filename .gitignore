@@ -36,6 +36,6 @@ venv/
 *.key
 *.pem
 
-# MkDocs outputs, generated publication mirrors (sources live in papers/)
+# MkDocs outputs, generated publication mirrors (sources live in manuscripts/Pxx/)
 /site/
 /docs/papers/

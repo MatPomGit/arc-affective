@@ -1,11 +1,10 @@
-"""Project source-to-MkDocs synchronizer: papers/ is canonical; docs/papers/ is generated.
+"""Project source-to-MkDocs synchronizer: manuscripts/Pxx/ is canonical; docs/papers/ is generated.
 
 Usage: python scripts/sync_mkdocs.py
 No third-party dependencies, network calls or source modification.
 """
 from __future__ import annotations
 
-import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -31,10 +30,10 @@ STAGES = (
 REPO = "https://github.com/MatPomGit/arc-affective"
 
 
-def generate(docs: Path | None = None, papers: Path | None = None) -> list[Path]:
+def generate(docs: Path | None = None, manuscripts: Path | None = None) -> list[Path]:
     """Generate documentation pages from paper sources, without changing sources."""
     docs = docs or ROOT / "docs"
-    papers = papers or ROOT / "papers"
+    manuscripts = manuscripts or ROOT / "manuscripts"
     target = docs / "papers"
     target.mkdir(parents=True, exist_ok=True)
 
@@ -50,13 +49,13 @@ def generate(docs: Path | None = None, papers: Path | None = None) -> list[Path]
     ]
     for code, slug, epic, stages, label in PAPERS:
         filename = f"{code}-{slug}.md"
-        source = papers / filename
+        source = manuscripts / code / "plan.md"
         if not source.is_file():
             raise FileNotFoundError(f"Missing canonical manuscript proposal: {source}")
         content = source.read_text(encoding="utf-8")
-        # papers/Pxx is one directory below repo root, docs/papers/Pxx is two.
-        # Translate only the canonical relative references to docs/ pages.
-        content = re.sub(r"\]\(\.\./docs/", "](../", content)
+        # Source and generated pages both sit two levels below the repo root.
+        # Translate Markdown links to docs/ without rewriting external URLs.
+        content = content.replace("](../../docs/", "](../")
         tracker = [
             "",
             "---",
@@ -64,7 +63,7 @@ def generate(docs: Path | None = None, papers: Path | None = None) -> list[Path]
             "## Plan realizacji w GitHub Issues",
             "",
             f"**[Issue nadrzędne #{epic}]({REPO}/issues/{epic})** · "
-            f"[Źródło protokołu]({REPO}/blob/main/papers/{filename})",
+            f"[Źródło planu]({REPO}/blob/main/manuscripts/{code}/plan.md)",
             "",
             "| Etap | Zadanie |",
             "| --- | --- |",
@@ -84,7 +83,7 @@ def generate(docs: Path | None = None, papers: Path | None = None) -> list[Path]
         generated.append(output)
         summary.append(
             f"| [**{code}** · {label}]({filename}) | "
-            f"[Protokół]({filename}) | [#{epic}]({REPO}/issues/{epic}) | "
+            f"[Plan badań]({filename}) | [#{epic}]({REPO}/issues/{epic}) | "
             f"[Rejestr etapów](../publication-milestones.md) |"
         )
     summary += [
@@ -108,4 +107,4 @@ def generate(docs: Path | None = None, papers: Path | None = None) -> list[Path]
 
 if __name__ == "__main__":
     pages = generate()
-    print(f"Generated {len(pages)} MkDocs pages from canonical papers/ sources")
+    print(f"Generated {len(pages)} MkDocs pages from canonical manuscripts/ sources")

@@ -30,11 +30,11 @@ Show reproducible subject-disjoint evaluation, positive delta against appropriat
 - [ ] 4. Independently reproduce, literature-check and draft P01.
 
 ## Status
-**IN PROGRESS — public FACED metadata audited and synthetic-only software tests completed; no original EEG signal analysis, empirical model performance, or publication claims completed.** Follow [methods](../docs/methodology.md), [privacy](../docs/governance.md), [hardware limits](../docs/hardware.md), and [portfolio boundaries](../docs/portfolio.md).
+**IN PROGRESS — public FACED metadata audited and synthetic-only software tests completed; no original EEG signal analysis, empirical model performance, or publication claims completed.** Follow [methods](../../docs/methodology.md), [privacy](../../docs/governance.md), [hardware limits](../../docs/hardware.md), and [portfolio boundaries](../../docs/portfolio.md).
 
 
 ## Manuscript work in progress (2026-10-30)
-A substantive [IEEEtran LaTeX draft](https://github.com/MatPomGit/arc-affective/blob/main/manuscripts/P01/main.tex) now contains a literature-positioned introduction, explicit train-only LOSO evaluation, hardware/montage eligibility rules, negative controls, planned reporting and limitations. The [analysis protocol](https://github.com/MatPomGit/arc-affective/blob/main/papers/P01-protocol.md) is a **candidate**, not a registered study. Newly relevant 2026 work reports severe identity confounding (DOI: [10.3390/s26175327](https://doi.org/10.3390/s26175327)); a generic low-channel result would overlap it. Original-source rights and physical signal/reference verification, EEG experiments and publication claims remain blocked; the manuscript has no fabricated outcomes.
+A substantive [IEEEtran LaTeX draft](https://github.com/MatPomGit/arc-affective/blob/main/manuscripts/P01/main.tex) now contains a literature-positioned introduction, explicit train-only LOSO evaluation, hardware/montage eligibility rules, negative controls, planned reporting and limitations. The [analysis protocol](https://github.com/MatPomGit/arc-affective/blob/main/manuscripts/P01/protocol.md) is a **candidate**, not a registered study. Newly relevant 2026 work reports severe identity confounding (DOI: [10.3390/s26175327](https://doi.org/10.3390/s26175327)); a generic low-channel result would overlap it. Original-source rights and physical signal/reference verification, EEG experiments and publication claims remain blocked; the manuscript has no fabricated outcomes.
 
 ## P01 grouped baseline software (2026-10-30)
 
