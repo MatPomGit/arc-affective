@@ -1,6 +1,6 @@
 # P01 — prospective analysis plan, candidate v0.1.0 (2026-10-30)
 
-**Status: DRAFT, NOT preregistered or frozen.** This is the decision record to be finalized at issue #22 after rights/metadata audit #14 and #2. Sources: [manuscript](https://github.com/MatPomGit/arc-affective/blob/main/manuscripts/P01/main.tex), [methods](../docs/methodology.md).
+**Status: DRAFT, NOT preregistered or frozen.** This is the decision record to be finalized at issue #22 after rights/metadata audit #14 and #2. Sources: [manuscript](https://github.com/MatPomGit/arc-affective/blob/main/manuscripts/P01/main.tex), [methods](../../docs/methodology.md).
 
 **Question:** Does the participant-held-out decrement associated with channel sparsity vary when acquisition corpus, physical electrode montage and reference are controlled? No assumption that EEG reveals an unobservable emotional state; labels are retrospective self-report.
 

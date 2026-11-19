@@ -22,7 +22,12 @@ class DocumentationTests(unittest.TestCase):
         self.assertEqual(len(module.PAPERS), 8)
         for code, slug, _, stages, _ in module.PAPERS:
             self.assertEqual(len(stages), 7, code)
-            self.assertTrue((ROOT / "papers" / f"{code}-{slug}.md").is_file())
+            self.assertTrue((ROOT / "manuscripts" / code / "plan.md").is_file())
+
+    def test_legacy_root_papers_directory_is_absent(self):
+        self.assertFalse((ROOT / "papers").exists())
+        for code, _, _, _, _ in module.PAPERS:
+            self.assertTrue((ROOT / "manuscripts" / code / "plan.md").is_file())
 
     def test_generator_is_deterministic_and_does_not_modify_sources(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -35,7 +40,7 @@ class DocumentationTests(unittest.TestCase):
             self.assertEqual(len(first), 9)
             self.assertEqual(len({x for p in module.PAPERS for x in p[3]}), 56)
             for out in first:
-                self.assertNotIn("](../docs/", out.read_text(encoding="utf-8"))
+                self.assertNotIn("](../../docs/", out.read_text(encoding="utf-8"))
 
     def test_nav_markdown_targets_exist_after_sync(self):
         module.generate()

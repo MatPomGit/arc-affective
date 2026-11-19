@@ -102,7 +102,7 @@ Prospective `N=1–3` local studies are for within-person, feasibility or engine
 **Write concise, verifiable, current documentation.** Avoid filler, duplicate explanations, changelog spam, speculative status claims and unnecessary files. Prefer updating canonical pages over inventing new pages. Use precise relative Markdown links for repo files and correct permanent URLs for external sources; verify links when touched.
 
 Canonical paths:
-- Research plans and manuscripts: `papers/`. Site material: editable `docs/`. Generated, ignored output: `docs/papers/` and `site/`; **never manually edit generated output**.
+- Canonical research plans and manuscripts: `manuscripts/Pxx/` (`plan.md`, optional `protocol.md`, and LaTeX sources when present). Site material: editable `docs/`. Generated, ignored output: `docs/papers/` and `site/`; **never manually edit generated output**.
 - Documentation configuration: [`mkdocs.yml`](mkdocs.yml). Paper synchronization: [`scripts/sync_mkdocs.py`](scripts/sync_mkdocs.py). Homepage: [`docs/index.md`](docs/index.md).
 - On paper changes run `python scripts/sync_mkdocs.py`, `python -m unittest discover -s tests -p test_docs.py -v` and `mkdocs build --strict` in an environment with [`requirements-docs.txt`](requirements-docs.txt). Update `mkdocs.yml` navigation when adding pages. Check rendered pages and local links, not only a successful build.
 

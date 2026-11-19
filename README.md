@@ -1,5 +1,7 @@
 # ARC Affective — Multimodal Affective and Cognitive State Computing
 
+**Synapse research project:** [syn78760374](https://www.synapse.org/Synapse:syn78760374) · ID: `syn78760374`. This reference does not verify data access or content.
+
 Engineering research programme on **affective and cognitive state monitoring**, uncertainty-aware multimodal sensing, adaptive games, human–computer interaction and safe robot control.
 
 **Scope:** Polish engineering/science disciplines AEEiTK (automation, electronics, electrical engineering and space technologies), ITiT (computer engineering and telecommunications), and informatics; signal processing, machine learning, control and embedded systems. Not clinical diagnosis, psychological test validation, medical monitoring or emotion mind-reading.
@@ -17,14 +19,14 @@ Engineering research programme on **affective and cognitive state monitoring**, 
 
 | ID | Paper / distinctive contribution | Validation |
 |---|---|---|
-| [P01](papers/P01-low-channel-transfer.md) | Sparse EEG representations under dataset and montage shift | Public EEG datasets, 0 local participants |
-| [P02](papers/P02-robust-fusion.md) | Uncertainty- and missing-modality-aware multimodal fusion | Licensed multimodal public data, 0 local participants |
-| [P03](papers/P03-personal-drift.md) | Personalised, drift-aware workload estimation over sessions | Repeated self-study, N=1 (up to 3) |
-| [P04](papers/P04-private-vision.md) | Privacy-preserving on-device facial-behaviour modelling | Public video + local non-retained webcam sessions |
-| [P05](papers/P05-hand-workload.md) | Hand-kinematic quality and task-demand estimation | Leap Motion N=1–3 |
-| [P06](papers/P06-adaptive-game.md) | Uncertainty-gated adaptation of game difficulty | Offline evaluation + randomised N-of-1 blocks |
-| [P07](papers/P07-safe-hri.md) | Gaze/hand intent and fail-safe robot teleoperation | ROS 2/Gazebo simulated robot + N=1–3 |
-| [P08](papers/P08-edge-systems.md) | Real-time, fault-tolerant multimodal edge inference | Repeatable CPU/GPU device benchmarks, N=0–1 |
+| [P01](manuscripts/P01/plan.md) | Sparse EEG representations under dataset and montage shift | Public EEG datasets, 0 local participants |
+| [P02](manuscripts/P02/plan.md) | Uncertainty- and missing-modality-aware multimodal fusion | Licensed multimodal public data, 0 local participants |
+| [P03](manuscripts/P03/plan.md) | Personalised, drift-aware workload estimation over sessions | Repeated self-study, N=1 (up to 3) |
+| [P04](manuscripts/P04/plan.md) | Privacy-preserving on-device facial-behaviour modelling | Public video + local non-retained webcam sessions |
+| [P05](manuscripts/P05/plan.md) | Hand-kinematic quality and task-demand estimation | Leap Motion N=1–3 |
+| [P06](manuscripts/P06/plan.md) | Uncertainty-gated adaptation of game difficulty | Offline evaluation + randomised N-of-1 blocks |
+| [P07](manuscripts/P07/plan.md) | Gaze/hand intent and fail-safe robot teleoperation | ROS 2/Gazebo simulated robot + N=1–3 |
+| [P08](manuscripts/P08/plan.md) | Real-time, fault-tolerant multimodal edge inference | Repeatable CPU/GPU device benchmarks, N=0–1 |
 
 See [scientific-discipline mapping](docs/discipline-map.md), [portfolio and non-overlap rules](docs/portfolio.md), [architecture](docs/architecture.md), [hardware rights](docs/hardware.md), [dataset registry](docs/datasets.md), [experimental methods](docs/methodology.md), [privacy and ethics](docs/governance.md), [execution order](docs/roadmap.md), [56 detailed issue milestones](docs/publication-milestones.md), [dependency graph](docs/research-dependencies.md) and [conditional schedule](docs/research-schedule.md).
 
@@ -46,12 +48,12 @@ mkdocs build --strict
 mkdocs serve
 ```
 
-Sources for paper documentation remain in `papers/`; `docs/papers/` is a generated, ignored directory. Deployment uses [Docs / MkDocs](.github/workflows/docs.yml) on GitHub Actions (public-repository standard runner; no metered API). [Publishing instructions](docs/operations/pages.md).
+Canonical plans and protocols live under `manuscripts/Pxx/`; `docs/papers/` is an ignored, generated MkDocs mirror preserving existing documentation URLs. Deployment uses [Docs / MkDocs](.github/workflows/docs.yml) on GitHub Actions (public-repository standard runner; no metered API). [Publishing instructions](docs/operations/pages.md).
 
 ## Project layout
 
 ```text
-papers/             Eight research protocols and publication gates
+manuscripts/Pxx/    Eight paper plans; P01/P08 protocols and LaTeX drafts
 docs/               Architecture, sensors, datasets, methods, governance, roadmap
 src/arc_affective/   Minimal zero-dependency event-schema and synthetic smoke test
 tests/              Offline deterministic unit tests

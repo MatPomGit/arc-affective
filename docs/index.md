@@ -10,6 +10,8 @@ Program badań inżynierskich obejmujący analizę EEG, komputerowe przetwarzani
 !!! info "Status projektu"
     Dokumentacja opisuje **osiem planowanych publikacji**, ich protokoły, zależności i warunki dopuszczenia do badań. Nie jest raportem o przeprowadzonych eksperymentach ani o potwierdzonej skuteczności modeli.
 
+**Zewnętrzny projekt badawczy:** [Synapse · syn78760374](https://www.synapse.org/Synapse:syn78760374) (ID: `syn78760374`). Link rejestruje lokalizację zasobu i nie stanowi potwierdzenia praw dostępu do danych.
+
 ## Obszary badań
 
 | Obszar | Publikacje | Główne zagadnienie |
