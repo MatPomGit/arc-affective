@@ -83,7 +83,7 @@ def generate(docs: Path | None = None, manuscripts: Path | None = None) -> list[
         generated.append(output)
         summary.append(
             f"| [**{code}** · {label}]({filename}) | "
-            f"[Protokół]({filename}) | [#{epic}]({REPO}/issues/{epic}) | "
+            f"[Plan badań]({filename}) | [#{epic}]({REPO}/issues/{epic}) | "
             f"[Rejestr etapów](../publication-milestones.md) |"
         )
     summary += [
@@ -107,4 +107,4 @@ def generate(docs: Path | None = None, manuscripts: Path | None = None) -> list[
 
 if __name__ == "__main__":
     pages = generate()
-    print(f"Generated {len(pages)} MkDocs pages from canonical papers/ sources")
+    print(f"Generated {len(pages)} MkDocs pages from canonical manuscripts/ sources")
