@@ -126,3 +126,8 @@ A task is **done** only when its declared deliverable exists and behaves as requ
 
 ## Procedura operacyjna i skille (2026-10-31)
 - Przed autonomicznym JUMP, rezerwacją Issues, doborem skilli, review, testowaniem exact-SHA i cleanup czytaj [projektowy cykl agentów](docs/development/agent-workflow.md). Nie zastępuje istniejących szczegółowych bramek naukowych, danych i uprawnień.
+
+
+## Publiczne GitHub Pages
+
+Jedynym źródłem publicznej strony jest `pages/` z jawną listą `config/pages-policy.json` i `mkdocs.public.yml`. Wewnętrzne `docs/`, instrukcje agentów, materiały redakcyjne i opisy współtworzenia repozytorium nie mogą być udostępniane na stronie. Każdy deploy wymaga osobnej zgody właściciela, audytu treści/HTML i widoczności strony; [polityka](docs/pages.md). Nie wznawiaj automatycznego `deploy-pages` bez zatwierdzenia.

@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "source_dir": "pages",
+  "output_dir": "_public_site",
+  "allowed_files": [
+    "index.md"
+  ],
+  "max_file_bytes": 15000,
+  "prohibited_patterns": [
+    "AGENTS.md",
+    "CONTRIBUTING",
+    "AUTOMATION.md",
+    "TODO.md",
+    "PROJECT_STATE.yaml",
+    "agent-workflow",
+    "issue-operating-procedure",
+    "REPLACE_",
+    "FIXME"
+  ],
+  "publication_requires_owner_approval": true
+}

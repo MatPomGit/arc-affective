@@ -76,3 +76,8 @@ Synthetic events are not physiological data or a trained affect estimator. They 
 Work through issues and focused PRs. Run the offline tests before merge. Do not launch GitHub-hosted paid compute or train on sensitive data by default. Human-subject protocols require institutional ethics/privacy assessment before collection, including an N-of-1 study.
 
 Zasady autonomii: [AGENTS.md](AGENTS.md), [procedura agentów](docs/development/agent-workflow.md).
+
+
+## Publiczna witryna i dokumentacja
+
+Publiczna prezentacja programu jest przygotowywana niezależnie w [`pages/`](pages/index.md), z [polityką publikacji](docs/pages.md). Wewnętrzna dokumentacja `docs/` nie jest automatycznie udostępniana, a obecny CI tworzy wyłącznie podgląd do zatwierdzenia. Materiały publiczne nie zawierają instrukcji dla agentów ani uwag redakcyjnych.

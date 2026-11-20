@@ -5,6 +5,11 @@ on:
     branches: [main]
     paths:
       - "docs/**"
+      - "pages/**"
+      - "mkdocs.public.yml"
+      - "config/pages-policy.json"
+      - "scripts/validate_public_pages.py"
+      - "tests/test_public_pages_policy.py"
       - "reports/**"
       - "manuscripts/**"
       - "mkdocs.yml"
@@ -46,6 +51,11 @@ on:
   pull_request:
     paths:
       - "docs/**"
+      - "pages/**"
+      - "mkdocs.public.yml"
+      - "config/pages-policy.json"
+      - "scripts/validate_public_pages.py"
+      - "tests/test_public_pages_policy.py"
       - "reports/**"
       - "manuscripts/**"
       - "mkdocs.yml"
@@ -147,29 +157,18 @@ jobs:
         run: python -m unittest discover -s tests -p test_p01_stimulus_control.py -v
       - name: Build strict MkDocs site
         run: mkdocs build --strict
-      - name: Prepare GitHub Pages
-        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
-        uses: actions/configure-pages@v5
-      - name: Upload static Pages artifact
-        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
-        uses: actions/upload-pages-artifact@v4
+      - name: Validate curated public-only Pages sources
+        run: python3 scripts/validate_public_pages.py
+      - name: Test public boundary
+        run: python3 -m unittest discover -s tests -p test_public_pages_policy.py -v
+      - name: Build curated public preview separately
+        run: python -m mkdocs build -f mkdocs.public.yml --strict --clean
+      - name: Upload manual-review preview (never deploy)
+        uses: actions/upload-artifact@v4
         with:
-          path: site/
+          name: arc-affective-public-pages-preview
+          path: _public_site/
+          if-no-files-found: error
 
-  deploy:
-    name: Deploy GitHub Pages
-    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
-    needs: build
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    permissions:
-      pages: write
-      id-token: write
-      contents: read
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Publish site
-        id: deployment
-        uses: actions/deploy-pages@v4
+# The main docs/ build remains an internal quality check.
+# Publication is disabled until a separately reviewed and approved deployment PR.
