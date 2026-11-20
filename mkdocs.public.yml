@@ -1,0 +1,23 @@
+site_name: "ARC Affective · Program badań"
+site_description: "Badania nad multimodalną analizą sygnałów i adaptacyjnymi systemami interakcji"
+docs_dir: pages
+site_dir: _public_site
+theme:
+  name: material
+  language: pl
+  font: false
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Tryb ciemny
+    - scheme: slate
+      primary: indigo
+      accent: light-blue
+      toggle:
+        icon: material/brightness-4
+        name: Tryb jasny
+nav:
+  - O programie: index.md

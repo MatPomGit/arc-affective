@@ -39,3 +39,5 @@ venv/
 # MkDocs outputs, generated publication mirrors (sources live in manuscripts/Pxx/)
 /site/
 /docs/papers/
+
+_public_site/
