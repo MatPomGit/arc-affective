@@ -9,7 +9,7 @@
     "path": "docs/portfolio/reorganizacja-systemu-badan/publication_register.md",
     "commit_sha": "84fd9acb0a9ec36d1585da0471f1516eb61339f9"
   },
-  "source_preservation": "All source files, git history, issues and working P01/P08 code remain untouched until verified target adoption",
+  "source_preservation": "The original source and full history remain intact; 52 P01/P08 execution and QA files have been copied to ARC AI with matching Git blob identifiers. No empirical EEG or hardware validation claimed.",
   "allowed_post_merge_cleanup": "Only separate explicitly reviewed commit after target files/code/tests and every live reference verified",
   "papers": [
     {
@@ -63,7 +63,7 @@
       "owner_programme": "arc-ai",
       "target_repository": "MatPomGit/arc-ai",
       "target_path": "manuscripts/MSC-AFFECT-P01/",
-      "migration_state": "TARGET_MANUSCRIPT_INTEGRATED_CODE_PENDING",
+      "migration_state": "TARGET_EXECUTABLE_E0_INTEGRATED",
       "target_pr": "https://github.com/MatPomGit/arc-ai/pull/1",
       "target_pr_head_sha": "4b6b149d284990095d48b0478157c56da52b347b",
       "source_issues": [
@@ -72,7 +72,16 @@
       "main_original_source": "manuscripts/P01/plan.md",
       "source_license_spdx": "Apache-2.0",
       "target_merge_sha": "7877b57a2cb7b8bb6923db9f376e14ce191922b2",
-      "transfer_scope": "manuscript_package_and_provenance_only"
+      "transfer_scope": "manuscript_package_and_provenance_only",
+      "software_transfer": {
+        "target_repository": "MatPomGit/arc-ai",
+        "target_merge_sha": "a4aff7b4d216b4a34ef767a3eb8ef01b5b316209",
+        "target_source_manifest": "research/affective/source_manifest.json",
+        "source_file_count": 52,
+        "ci_url": "https://github.com/MatPomGit/arc-ai/actions/runs/44916947379",
+        "empirical_validation": false,
+        "real_hardware_validation": false
+      }
     },
     {
       "id": "MSC-AFFECT-P02",
@@ -285,7 +294,7 @@
       "owner_programme": "arc-ai",
       "target_repository": "MatPomGit/arc-ai",
       "target_path": "manuscripts/MSC-AFFECT-P08/",
-      "migration_state": "TARGET_MANUSCRIPT_INTEGRATED_CODE_PENDING",
+      "migration_state": "TARGET_EXECUTABLE_E0_INTEGRATED",
       "target_pr": "https://github.com/MatPomGit/arc-ai/pull/1",
       "target_pr_head_sha": "4b6b149d284990095d48b0478157c56da52b347b",
       "source_issues": [
@@ -294,7 +303,16 @@
       "main_original_source": "manuscripts/P08/plan.md",
       "source_license_spdx": "Apache-2.0",
       "target_merge_sha": "7877b57a2cb7b8bb6923db9f376e14ce191922b2",
-      "transfer_scope": "manuscript_package_and_provenance_only"
+      "transfer_scope": "manuscript_package_and_provenance_only",
+      "software_transfer": {
+        "target_repository": "MatPomGit/arc-ai",
+        "target_merge_sha": "a4aff7b4d216b4a34ef767a3eb8ef01b5b316209",
+        "target_source_manifest": "research/affective/source_manifest.json",
+        "source_file_count": 52,
+        "ci_url": "https://github.com/MatPomGit/arc-ai/actions/runs/44916947379",
+        "empirical_validation": false,
+        "real_hardware_validation": false
+      }
     }
   ],
   "software_inventory": [
@@ -634,5 +652,19 @@
       "size": 3714,
       "transfer_dependency": "shared_engineering_framework"
     }
-  ]
+  ],
+  "software_migration": {
+    "target": "MatPomGit/arc-ai",
+    "target_merge_sha": "a4aff7b4d216b4a34ef767a3eb8ef01b5b316209",
+    "source_snapshot_sha": "0ff5f1531f03270c4f9fdcc7f3af6d2e9aca85dd",
+    "transferred_files": 52,
+    "inventory_files": 56,
+    "source_only_files": [
+      "tests/test_docs.py",
+      "tests/test_events.py",
+      "tests/test_manuscripts.py",
+      "tests/test_public_pages_policy.py"
+    ],
+    "validation": "P01/P08 synthetic unit tests and original file integrity PASS; no real EEG/hardware"
+  }
 }
