@@ -15,7 +15,7 @@
 
 ## Zakres przeniesienia
 
-**P05**: skopiowano merytoryczny plan wraz z założeniami, punktami końcowymi i oryginalnym odwołaniem do metodyki. W `arc-neuro` trafia do `research/affective/MSC-AFFECT-P05/`, **poza** 63 neutralnymi slotami `papers/` i poza publiczną stroną.
+**P05**: skopiowano merytoryczny plan wraz z założeniami, punktami końcowymi i oryginalnym odwołaniem do metodyki. W `arc-neuro` trafia do `papers/affect/MSC-AFFECT-P05/`, **poza** 63 neutralnymi slotami `papers/` i poza publiczną stroną.
 
 **P07**: import planu do istniejącego PR ARC Robo obok `manuscripts/MSC-AFFECT-P07/main.tex`. System ROS2/Gazebo i deterministyczny governor pozostają **projektem**, nie uruchomiono robota ani nie zatwierdzono pracy na sprzęcie fizycznym.
 

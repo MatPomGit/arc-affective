@@ -162,10 +162,10 @@
       "registry_status": "PLANNED",
       "owner_programme": "arc-neuro",
       "target_repository": "MatPomGit/arc-neuro",
-      "target_path": "research/affective/MSC-AFFECT-P05/plan.md",
+      "target_path": "papers/affect/MSC-AFFECT-P05/plan.md",
       "migration_state": "STAGED_IN_OPEN_PR",
       "target_pr": "https://github.com/MatPomGit/arc-neuro/pull/10",
-      "target_pr_head_sha": "f9982d050f919b52264963708b74a5e5eceafc74",
+      "target_pr_head_sha": "21ff0cc218aedfea4d65c2836b71179bd9fbcea9",
       "source_issues": [
         "https://github.com/MatPomGit/arc-affective/issues/9"
       ],

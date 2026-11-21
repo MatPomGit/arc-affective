@@ -33,6 +33,8 @@ class MigrationContractTest(unittest.TestCase):
         entries=DATA["papers"]
         self.assertEqual(sum(p["migration_state"]=="BLOCKED_TARGET_REPOSITORY_ABSENT" for p in entries),6)
         self.assertEqual(sum(p["migration_state"]=="STAGED_IN_OPEN_PR" for p in entries),2)
+        p05=next(p for p in entries if p["id"]=="MSC-AFFECT-P05")
+        self.assertEqual(p05["target_path"],"papers/affect/MSC-AFFECT-P05/plan.md")
         for p in entries:
             if p["target_pr"]:
                 self.assertTrue(p["target_pr"].startswith("https://github.com/MatPomGit/"))
