@@ -1,0 +1,616 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-21",
+  "migration": "arc-affective-to-arc-programmes",
+  "source_repository": "MatPomGit/arc-affective",
+  "source_snapshot_sha": "0ff5f1531f03270c4f9fdcc7f3af6d2e9aca85dd",
+  "central_register": {
+    "repository": "MatPomGit/research-autopilot",
+    "path": "docs/portfolio/reorganizacja-systemu-badan/publication_register.md",
+    "commit_sha": "84fd9acb0a9ec36d1585da0471f1516eb61339f9"
+  },
+  "source_preservation": "All source files, git history, issues and working P01/P08 code remain untouched until verified target adoption",
+  "allowed_post_merge_cleanup": "Only separate explicitly reviewed commit after target files/code/tests and every live reference verified",
+  "papers": [
+    {
+      "id": "MSC-AFFECT-P01",
+      "source_repository": "MatPomGit/arc-affective",
+      "source_snapshot_sha": "0ff5f1531f03270c4f9fdcc7f3af6d2e9aca85dd",
+      "source_paths": [
+        {
+          "path": "manuscripts/P01/main.tex",
+          "blob_sha": "3850b11c3b24f575b112334dce565f04b99bd3aa",
+          "size": 1397
+        },
+        {
+          "path": "manuscripts/P01/plan.md",
+          "blob_sha": "42ae10b86cf137234c51f1446a5a95868b0db8e5",
+          "size": 7958
+        },
+        {
+          "path": "manuscripts/P01/protocol.md",
+          "blob_sha": "2e01e5fff48851c352dd32e2c65df2eceea0aa49",
+          "size": 13275
+        },
+        {
+          "path": "manuscripts/P01/references.bib",
+          "blob_sha": "00e894c8c7c75110a5cddf923c4e2f3f6116cb50",
+          "size": 3122
+        },
+        {
+          "path": "manuscripts/P01/sections/discussion.tex",
+          "blob_sha": "d4594337cbe8f70db829ea4cab3c6c3c30b3f51e",
+          "size": 1368
+        },
+        {
+          "path": "manuscripts/P01/sections/introduction.tex",
+          "blob_sha": "ef19ddad59d7f68a805a1bcf4a49faf078d32833",
+          "size": 2048
+        },
+        {
+          "path": "manuscripts/P01/sections/methods.tex",
+          "blob_sha": "94b64ff2730a49b6ecc29694487f415db7a776a5",
+          "size": 7410
+        },
+        {
+          "path": "manuscripts/P01/sections/results.tex",
+          "blob_sha": "b0b73f2dd0512affd32f484745c5002e2d47506a",
+          "size": 1068
+        }
+      ],
+      "registry_type": "MANUSCRIPT",
+      "registry_status": "DRAFT",
+      "owner_programme": "arc-ai",
+      "target_repository": "MatPomGit/arc-ai",
+      "target_path": "manuscripts/MSC-AFFECT-P01/",
+      "migration_state": "BLOCKED_TARGET_REPOSITORY_ABSENT",
+      "target_pr": null,
+      "target_pr_head_sha": null,
+      "source_issues": [
+        "https://github.com/MatPomGit/arc-affective/issues/5"
+      ],
+      "main_original_source": "manuscripts/P01/plan.md"
+    },
+    {
+      "id": "MSC-AFFECT-P02",
+      "source_repository": "MatPomGit/arc-affective",
+      "source_snapshot_sha": "0ff5f1531f03270c4f9fdcc7f3af6d2e9aca85dd",
+      "source_paths": [
+        {
+          "path": "manuscripts/P02/plan.md",
+          "blob_sha": "093060fde5b411cd42d12aa6f5ad63ec47fda1e8",
+          "size": 2053
+        }
+      ],
+      "registry_type": "MANUSCRIPT",
+      "registry_status": "PLANNED",
+      "owner_programme": "arc-ai",
+      "target_repository": "MatPomGit/arc-ai",
+      "target_path": "manuscripts/MSC-AFFECT-P02/",
+      "migration_state": "BLOCKED_TARGET_REPOSITORY_ABSENT",
+      "target_pr": null,
+      "target_pr_head_sha": null,
+      "source_issues": [
+        "https://github.com/MatPomGit/arc-affective/issues/6"
+      ],
+      "main_original_source": "manuscripts/P02/plan.md"
+    },
+    {
+      "id": "MSC-AFFECT-P03",
+      "source_repository": "MatPomGit/arc-affective",
+      "source_snapshot_sha": "0ff5f1531f03270c4f9fdcc7f3af6d2e9aca85dd",
+      "source_paths": [
+        {
+          "path": "manuscripts/P03/plan.md",
+          "blob_sha": "ad560c2a6aceb9a95290876014259815d16b02df",
+          "size": 2049
+        }
+      ],
+      "registry_type": "MANUSCRIPT",
+      "registry_status": "PLANNED",
+      "owner_programme": "arc-ai",
+      "target_repository": "MatPomGit/arc-ai",
+      "target_path": "manuscripts/MSC-AFFECT-P03/",
+      "migration_state": "BLOCKED_TARGET_REPOSITORY_ABSENT",
+      "target_pr": null,
+      "target_pr_head_sha": null,
+      "source_issues": [
+        "https://github.com/MatPomGit/arc-affective/issues/7"
+      ],
+      "main_original_source": "manuscripts/P03/plan.md"
+    },
+    {
+      "id": "MSC-AFFECT-P04",
+      "source_repository": "MatPomGit/arc-affective",
+      "source_snapshot_sha": "0ff5f1531f03270c4f9fdcc7f3af6d2e9aca85dd",
+      "source_paths": [
+        {
+          "path": "manuscripts/P04/plan.md",
+          "blob_sha": "9af6adf8c0ebc8ff20bec91c70b47e977671fcc5",
+          "size": 2010
+        }
+      ],
+      "registry_type": "MANUSCRIPT",
+      "registry_status": "PLANNED",
+      "owner_programme": "arc-ai",
+      "target_repository": "MatPomGit/arc-ai",
+      "target_path": "manuscripts/MSC-AFFECT-P04/",
+      "migration_state": "BLOCKED_TARGET_REPOSITORY_ABSENT",
+      "target_pr": null,
+      "target_pr_head_sha": null,
+      "source_issues": [
+        "https://github.com/MatPomGit/arc-affective/issues/8"
+      ],
+      "main_original_source": "manuscripts/P04/plan.md"
+    },
+    {
+      "id": "MSC-AFFECT-P05",
+      "source_repository": "MatPomGit/arc-affective",
+      "source_snapshot_sha": "0ff5f1531f03270c4f9fdcc7f3af6d2e9aca85dd",
+      "source_paths": [
+        {
+          "path": "manuscripts/P05/plan.md",
+          "blob_sha": "92791dd60a5c9d2f3e6f702a7bb54453668fc5b4",
+          "size": 2037
+        }
+      ],
+      "registry_type": "MANUSCRIPT",
+      "registry_status": "PLANNED",
+      "owner_programme": "arc-neuro",
+      "target_repository": "MatPomGit/arc-neuro",
+      "target_path": "research/affective/MSC-AFFECT-P05/plan.md",
+      "migration_state": "STAGED_IN_OPEN_PR",
+      "target_pr": "https://github.com/MatPomGit/arc-neuro/pull/10",
+      "target_pr_head_sha": "ce7bcec7ed1da735e772e878d3f61ab8cf4d19c8",
+      "source_issues": [
+        "https://github.com/MatPomGit/arc-affective/issues/9"
+      ],
+      "main_original_source": "manuscripts/P05/plan.md"
+    },
+    {
+      "id": "MSC-AFFECT-P06",
+      "source_repository": "MatPomGit/arc-affective",
+      "source_snapshot_sha": "0ff5f1531f03270c4f9fdcc7f3af6d2e9aca85dd",
+      "source_paths": [
+        {
+          "path": "manuscripts/P06/plan.md",
+          "blob_sha": "0fdf89d220801415ddc1f5086780677ead1645c0",
+          "size": 2166
+        }
+      ],
+      "registry_type": "MANUSCRIPT",
+      "registry_status": "PLANNED",
+      "owner_programme": "arc-ai",
+      "target_repository": "MatPomGit/arc-ai",
+      "target_path": "manuscripts/MSC-AFFECT-P06/",
+      "migration_state": "BLOCKED_TARGET_REPOSITORY_ABSENT",
+      "target_pr": null,
+      "target_pr_head_sha": null,
+      "source_issues": [
+        "https://github.com/MatPomGit/arc-affective/issues/10"
+      ],
+      "main_original_source": "manuscripts/P06/plan.md"
+    },
+    {
+      "id": "MSC-AFFECT-P07",
+      "source_repository": "MatPomGit/arc-affective",
+      "source_snapshot_sha": "0ff5f1531f03270c4f9fdcc7f3af6d2e9aca85dd",
+      "source_paths": [
+        {
+          "path": "manuscripts/P07/plan.md",
+          "blob_sha": "92d7c570f926f4160ca7093c2b4b3acf6756aec2",
+          "size": 2174
+        }
+      ],
+      "registry_type": "MANUSCRIPT",
+      "registry_status": "PLANNED",
+      "owner_programme": "arc-robo",
+      "target_repository": "MatPomGit/arc-robo",
+      "target_path": "manuscripts/MSC-AFFECT-P07/plan.md",
+      "migration_state": "STAGED_IN_OPEN_PR",
+      "target_pr": "https://github.com/MatPomGit/arc-robo/pull/2",
+      "target_pr_head_sha": "729febde26e1009c62af1c15e17b49318194637b",
+      "source_issues": [
+        "https://github.com/MatPomGit/arc-affective/issues/11"
+      ],
+      "main_original_source": "manuscripts/P07/plan.md"
+    },
+    {
+      "id": "MSC-AFFECT-P08",
+      "source_repository": "MatPomGit/arc-affective",
+      "source_snapshot_sha": "0ff5f1531f03270c4f9fdcc7f3af6d2e9aca85dd",
+      "source_paths": [
+        {
+          "path": "manuscripts/P08/main.tex",
+          "blob_sha": "4134a2ebcc973d2bb398dbbef4e5d542fba24dfb",
+          "size": 1388
+        },
+        {
+          "path": "manuscripts/P08/plan.md",
+          "blob_sha": "96ef01fca7d2f0a88db469b967e54eb49a355f84",
+          "size": 2851
+        },
+        {
+          "path": "manuscripts/P08/protocol.md",
+          "blob_sha": "46c1293a4c02d8b7623cc60e2b38edd701dd8a17",
+          "size": 2811
+        },
+        {
+          "path": "manuscripts/P08/references.bib",
+          "blob_sha": "fe779b3f8ee776c754e1a4294c792762d80a204d",
+          "size": 1158
+        },
+        {
+          "path": "manuscripts/P08/sections/discussion.tex",
+          "blob_sha": "d7b923df288221972a50ae0539f0d6b21a764c66",
+          "size": 1195
+        },
+        {
+          "path": "manuscripts/P08/sections/introduction.tex",
+          "blob_sha": "1478a468d129e0135be792e4934701a52827e74a",
+          "size": 1379
+        },
+        {
+          "path": "manuscripts/P08/sections/methods.tex",
+          "blob_sha": "cf170dd7cc6bf01315810201a47847bc6c62545d",
+          "size": 4354
+        },
+        {
+          "path": "manuscripts/P08/sections/results.tex",
+          "blob_sha": "9948b78c578ebd133eee585406e5d361e2c7d8b3",
+          "size": 906
+        }
+      ],
+      "registry_type": "MANUSCRIPT",
+      "registry_status": "DRAFT",
+      "owner_programme": "arc-ai",
+      "target_repository": "MatPomGit/arc-ai",
+      "target_path": "manuscripts/MSC-AFFECT-P08/",
+      "migration_state": "BLOCKED_TARGET_REPOSITORY_ABSENT",
+      "target_pr": null,
+      "target_pr_head_sha": null,
+      "source_issues": [
+        "https://github.com/MatPomGit/arc-affective/issues/12"
+      ],
+      "main_original_source": "manuscripts/P08/plan.md"
+    }
+  ],
+  "software_inventory": [
+    {
+      "path": "pyproject.toml",
+      "blob_sha": "8d487bdee87dfd49d4bf820cbe65156d1dba2c9f",
+      "size": 367,
+      "transfer_dependency": "shared_engineering_framework"
+    },
+    {
+      "path": "reports/P01-bids-metadata-qa.md",
+      "blob_sha": "5c8511f8f297ac3e13adb96d3a25910d53d32adb",
+      "size": 6845,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "reports/P01-continuous-inference-qa.md",
+      "blob_sha": "c8a31b90b7157911f7bf0a6ff58912c514dcbcd5",
+      "size": 2761,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "reports/P01-continuous-qa.md",
+      "blob_sha": "3a42acba3f91ae84abdac46d7d9533ba1a864b9a",
+      "size": 3295,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "reports/P01-controls-qa.md",
+      "blob_sha": "acaff5a5522d4a0b4b196714f258ca7b2f812e65",
+      "size": 2420,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "reports/P01-converter-qa.md",
+      "blob_sha": "2763e56bb4e5a19eaa2c08d45b73372c96b389e3",
+      "size": 4710,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "reports/P01-data-audit.md",
+      "blob_sha": "311605eebc2fb8ab1c8f52db44743a06ccf85784",
+      "size": 9105,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "reports/P01-endpoint-decision.md",
+      "blob_sha": "bac4b9e050601d321fbd30a575994640b3b3b7e5",
+      "size": 5548,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "reports/P01-evaluation-qa.md",
+      "blob_sha": "f3d59a63980dd07c0724d8368c3187390ca64fa7",
+      "size": 3466,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "reports/P01-event-linkage-qa.md",
+      "blob_sha": "2cb81b7694e2e3576438c2f5590ecb7bf319c83c",
+      "size": 6382,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "reports/P01-faced-preprocessed-order-qa.md",
+      "blob_sha": "dbcf9f16942f1a2aa2cd1aa3aaa7af39fb30cdc6",
+      "size": 5318,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "reports/P01-faced-provenance-qa.md",
+      "blob_sha": "208b93e5faa5fc5dae19999c8598631f75b5d87f",
+      "size": 11872,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "reports/P01-manifest-gate.md",
+      "blob_sha": "69bce00adf6999c238c1e11edc189b5db4fbd3c5",
+      "size": 1574,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "reports/P01-montage-review-qa.md",
+      "blob_sha": "a8c7bdfcd759d8a00a144cb72fcd43c3c8d9ef9c",
+      "size": 3400,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "reports/P01-source-recording-qa.md",
+      "blob_sha": "2a3d7cf695ea6c1dddad776f39092a49714e95db",
+      "size": 5448,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "reports/P01-statistics-qa.md",
+      "blob_sha": "e031008ef0b1cf16edefa0952eccc9ec770729a3",
+      "size": 2536,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "reports/P01-stimulus-confound-qa.md",
+      "blob_sha": "289dccf197bd0378a7e7e221713979f81228cade",
+      "size": 8025,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "reports/P08-data-qa.md",
+      "blob_sha": "40dd65dd2f393ad3762dfeb7b25609fb93ba50a4",
+      "size": 2320,
+      "transfer_dependency": "shared_engineering_framework"
+    },
+    {
+      "path": "src/arc_affective/__init__.py",
+      "blob_sha": "626ab7f36cc723f53d98cbdba18eef2b0f7f0dae",
+      "size": 104,
+      "transfer_dependency": "shared_engineering_framework"
+    },
+    {
+      "path": "src/arc_affective/cli.py",
+      "blob_sha": "1dbf525d9435a380c1716cd2799c2322341c2a06",
+      "size": 618,
+      "transfer_dependency": "shared_engineering_framework"
+    },
+    {
+      "path": "src/arc_affective/events.py",
+      "blob_sha": "c37ab06a7f5898df0464f976ed496afaa78e4f48",
+      "size": 2617,
+      "transfer_dependency": "shared_engineering_framework"
+    },
+    {
+      "path": "src/arc_affective/p01_bids_qc.py",
+      "blob_sha": "e60672d1521b90ca72a81f87fb3ee764e2392bfd",
+      "size": 11071,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "src/arc_affective/p01_continuous.py",
+      "blob_sha": "ecfe64423aede779c8d2ebaa7685db76733cbbca",
+      "size": 12619,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "src/arc_affective/p01_continuous_inference.py",
+      "blob_sha": "6ba4dadc20fffc8da9c1f1f24d98b4418c3d23ed",
+      "size": 5318,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "src/arc_affective/p01_controls.py",
+      "blob_sha": "dab6c1d8ce7955439f436446acf64b41d8260584",
+      "size": 6026,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "src/arc_affective/p01_converter_qc.py",
+      "blob_sha": "9af8142c8c9dc86b5af6ad0eecf760756ffd2825",
+      "size": 7481,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "src/arc_affective/p01_evaluation.py",
+      "blob_sha": "dab4ea3069795fe1a2bb1c4c0f188f46d58d6768",
+      "size": 12723,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "src/arc_affective/p01_event_linkage.py",
+      "blob_sha": "9be70645fbc6dc6c56dd2518e490da347abd9785",
+      "size": 9284,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "src/arc_affective/p01_faced_preprocessing_order.py",
+      "blob_sha": "10411bff5172dfc0ffc95955f2cc44762fa6bde0",
+      "size": 8588,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "src/arc_affective/p01_faced_provenance.py",
+      "blob_sha": "3323b85788a7842509df0e67cca3655595d2b8b2",
+      "size": 14629,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "src/arc_affective/p01_montage_review.py",
+      "blob_sha": "2ab6cb66fec8455aae2460de4df5b0fdc2515663",
+      "size": 3675,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "src/arc_affective/p01_registry.py",
+      "blob_sha": "bf2322165305f4dd0661216acc97d0801efb4df1",
+      "size": 3923,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "src/arc_affective/p01_source_recording_reconcile.py",
+      "blob_sha": "b3e5369a5c9d88cf28a1e83c24af3c417c91cb3d",
+      "size": 6940,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "src/arc_affective/p01_stimulus_control.py",
+      "blob_sha": "34c36c9e133584f67c9bc8f3c2b72cc0e62a7ae2",
+      "size": 13556,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "src/arc_affective/p01_uncertainty.py",
+      "blob_sha": "ef7447a681a4c8c3de541c4e0619b02aad1a0e6b",
+      "size": 4587,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "src/arc_affective/p08_benchmark.py",
+      "blob_sha": "e4332fc69fdc34331cfbfbb0683355b8606e0337",
+      "size": 8763,
+      "transfer_dependency": "MSC-AFFECT-P08"
+    },
+    {
+      "path": "src/arc_affective/synthetic.py",
+      "blob_sha": "f26e15a038aa9356541c67bf47559b08b90bb63c",
+      "size": 573,
+      "transfer_dependency": "shared_engineering_framework"
+    },
+    {
+      "path": "tests/test_docs.py",
+      "blob_sha": "346b33d8790af2154239ead97f951152da98a395",
+      "size": 2979,
+      "transfer_dependency": "shared_engineering_framework"
+    },
+    {
+      "path": "tests/test_events.py",
+      "blob_sha": "bc0ec7caf3508f17351e0ef9bf08a505ecd76a79",
+      "size": 1994,
+      "transfer_dependency": "shared_engineering_framework"
+    },
+    {
+      "path": "tests/test_manuscripts.py",
+      "blob_sha": "06a1a2976f23bf358309115afb24cc76113b2af0",
+      "size": 2752,
+      "transfer_dependency": "shared_engineering_framework"
+    },
+    {
+      "path": "tests/test_p01_bids_qc.py",
+      "blob_sha": "71a12b8a687fb314c501173c1af1362a0efc3d3b",
+      "size": 7987,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "tests/test_p01_continuous.py",
+      "blob_sha": "dc2437019113d0e39dfc8ce4a26dcaa6e00067c9",
+      "size": 6903,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "tests/test_p01_continuous_inference.py",
+      "blob_sha": "1aeb44c5a7a7d210be613351d5c71b2b68d5fc71",
+      "size": 4947,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "tests/test_p01_controls.py",
+      "blob_sha": "38e37fa7c30663b63173ce57a3d06cc0182204a7",
+      "size": 4844,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "tests/test_p01_converter_qc.py",
+      "blob_sha": "966bde6e21fc775bda940f3e272cb432a753bdf4",
+      "size": 5841,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "tests/test_p01_evaluation.py",
+      "blob_sha": "1aaa40dcc9a4f41748527ec653fecf82b0f32abe",
+      "size": 6668,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "tests/test_p01_event_linkage.py",
+      "blob_sha": "e7dc44187fee25208aa652945263fac352f666da",
+      "size": 7699,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "tests/test_p01_faced_preprocessing_order.py",
+      "blob_sha": "8470b658b23e6c3e9d615d3c3bd5fa4256236b96",
+      "size": 5681,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "tests/test_p01_faced_provenance.py",
+      "blob_sha": "b016e93c1db5290ddf8ba595547e0d4c9618fe46",
+      "size": 11420,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "tests/test_p01_montage_review.py",
+      "blob_sha": "c4ee166f5c0e8ff7090ae3bbd181590f5346a9e7",
+      "size": 3636,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "tests/test_p01_registry.py",
+      "blob_sha": "d617204c39400b96b52d155ac4c2842e110839a0",
+      "size": 3106,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "tests/test_p01_source_recording_reconcile.py",
+      "blob_sha": "a9362ae2609b3cac75b261a96e91101de37db985",
+      "size": 6680,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "tests/test_p01_stimulus_control.py",
+      "blob_sha": "b4f1cb9da6d8f12867d92fb744b166737491c392",
+      "size": 13686,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "tests/test_p01_uncertainty.py",
+      "blob_sha": "6de829dc5c9adad9eb173c4f4b31d25764fb6d89",
+      "size": 3443,
+      "transfer_dependency": "MSC-AFFECT-P01"
+    },
+    {
+      "path": "tests/test_p08_benchmark.py",
+      "blob_sha": "1e1ace85775c457b4b927d7983d19dc516584903",
+      "size": 3337,
+      "transfer_dependency": "MSC-AFFECT-P08"
+    },
+    {
+      "path": "tests/test_public_pages_policy.py",
+      "blob_sha": "de21e118363ee8c31f37ee4d48da63d05294f9fc",
+      "size": 3714,
+      "transfer_dependency": "shared_engineering_framework"
+    }
+  ]
+}
