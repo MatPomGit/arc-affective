@@ -23,6 +23,10 @@
 
 **XR i współdzielone metody:** projekty interfejsów XR i gry adaptacyjnej nie są automatycznie kopiowane do `arc-xr`; migracja dotyczy właściciela pierwszorzędowego pytania, a interfejs jest zależnością. Kod wspólny `events.py`, `synthetic.py` i raporty QC powinny zachować wspólną bazę testową przy ewentualnej przyszłej separacji LIB/APP. Szczegóły aparatury należą do prywatnego rejestru urządzeń; identyfikatorów ani danych uczestników nie przenosić do publicznych repozytoriów.
 
+**Licencje:** planowane źródła są objęte licencją `Apache-2.0` w pierwotnym repozytorium. Przy imporcie P05/P07 skopiowano pełną licencję `ORIGINAL_LICENSE` i zapisano źródłowy blob; nowe repozytoria nie zmieniają automatycznie praw do materiałów. Ostateczne przeniesienie P01/P08 musi także zachować licencję kodu i zależności.
+
+**Zadanie kontynuacji:** [Research Autopilot #489](https://github.com/MatPomGit/research-autopilot/issues/489) — utworzenie docelowego `arc-ai` i pełna migracja sześciu prac z testami.
+
 ## Kryteria zamknięcia
 
 1. **Provisioning:** istniejące docelowe repo i uprawnienia, zweryfikowany target SHA; bez przenoszenia do fikcyjnego `arc-ai`.

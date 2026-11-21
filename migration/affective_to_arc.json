@@ -69,7 +69,8 @@
       "source_issues": [
         "https://github.com/MatPomGit/arc-affective/issues/5"
       ],
-      "main_original_source": "manuscripts/P01/plan.md"
+      "main_original_source": "manuscripts/P01/plan.md",
+      "source_license_spdx": "Apache-2.0"
     },
     {
       "id": "MSC-AFFECT-P02",
@@ -93,7 +94,8 @@
       "source_issues": [
         "https://github.com/MatPomGit/arc-affective/issues/6"
       ],
-      "main_original_source": "manuscripts/P02/plan.md"
+      "main_original_source": "manuscripts/P02/plan.md",
+      "source_license_spdx": "Apache-2.0"
     },
     {
       "id": "MSC-AFFECT-P03",
@@ -117,7 +119,8 @@
       "source_issues": [
         "https://github.com/MatPomGit/arc-affective/issues/7"
       ],
-      "main_original_source": "manuscripts/P03/plan.md"
+      "main_original_source": "manuscripts/P03/plan.md",
+      "source_license_spdx": "Apache-2.0"
     },
     {
       "id": "MSC-AFFECT-P04",
@@ -141,7 +144,8 @@
       "source_issues": [
         "https://github.com/MatPomGit/arc-affective/issues/8"
       ],
-      "main_original_source": "manuscripts/P04/plan.md"
+      "main_original_source": "manuscripts/P04/plan.md",
+      "source_license_spdx": "Apache-2.0"
     },
     {
       "id": "MSC-AFFECT-P05",
@@ -161,11 +165,12 @@
       "target_path": "research/affective/MSC-AFFECT-P05/plan.md",
       "migration_state": "STAGED_IN_OPEN_PR",
       "target_pr": "https://github.com/MatPomGit/arc-neuro/pull/10",
-      "target_pr_head_sha": "ce7bcec7ed1da735e772e878d3f61ab8cf4d19c8",
+      "target_pr_head_sha": "f9982d050f919b52264963708b74a5e5eceafc74",
       "source_issues": [
         "https://github.com/MatPomGit/arc-affective/issues/9"
       ],
-      "main_original_source": "manuscripts/P05/plan.md"
+      "main_original_source": "manuscripts/P05/plan.md",
+      "source_license_spdx": "Apache-2.0"
     },
     {
       "id": "MSC-AFFECT-P06",
@@ -189,7 +194,8 @@
       "source_issues": [
         "https://github.com/MatPomGit/arc-affective/issues/10"
       ],
-      "main_original_source": "manuscripts/P06/plan.md"
+      "main_original_source": "manuscripts/P06/plan.md",
+      "source_license_spdx": "Apache-2.0"
     },
     {
       "id": "MSC-AFFECT-P07",
@@ -209,11 +215,12 @@
       "target_path": "manuscripts/MSC-AFFECT-P07/plan.md",
       "migration_state": "STAGED_IN_OPEN_PR",
       "target_pr": "https://github.com/MatPomGit/arc-robo/pull/2",
-      "target_pr_head_sha": "729febde26e1009c62af1c15e17b49318194637b",
+      "target_pr_head_sha": "fd67b50597eb480d4754248e937fc911b9724d0c",
       "source_issues": [
         "https://github.com/MatPomGit/arc-affective/issues/11"
       ],
-      "main_original_source": "manuscripts/P07/plan.md"
+      "main_original_source": "manuscripts/P07/plan.md",
+      "source_license_spdx": "Apache-2.0"
     },
     {
       "id": "MSC-AFFECT-P08",
@@ -272,7 +279,8 @@
       "source_issues": [
         "https://github.com/MatPomGit/arc-affective/issues/12"
       ],
-      "main_original_source": "manuscripts/P08/plan.md"
+      "main_original_source": "manuscripts/P08/plan.md",
+      "source_license_spdx": "Apache-2.0"
     }
   ],
   "software_inventory": [
