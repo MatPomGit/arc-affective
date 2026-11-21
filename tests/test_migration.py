@@ -31,7 +31,16 @@ class MigrationContractTest(unittest.TestCase):
             self.assertEqual(git_blob_sha((ROOT/p["path"]).read_bytes()),p["blob_sha"])
     def test_six_ai_manuscript_handoffs_and_two_integrated_plans(self):
         entries=DATA["papers"]
-        self.assertEqual(sum(p["migration_state"]=="TARGET_MANUSCRIPT_INTEGRATED_CODE_PENDING" for p in entries),6)
+        self.assertEqual(sum(p["migration_state"]=="TARGET_MANUSCRIPT_INTEGRATED_CODE_PENDING" for p in entries),4)
+        self.assertEqual(sum(p["migration_state"]=="TARGET_EXECUTABLE_E0_INTEGRATED" for p in entries),2)
+        self.assertEqual(DATA["software_migration"]["transferred_files"],52)
+        self.assertEqual(DATA["software_migration"]["inventory_files"],56)
+        self.assertEqual(len(DATA["software_migration"]["source_only_files"]),4)
+        for p in entries:
+            if p["migration_state"]=="TARGET_EXECUTABLE_E0_INTEGRATED":
+                self.assertEqual(p["software_transfer"]["source_file_count"],52)
+                self.assertFalse(p["software_transfer"]["empirical_validation"])
+                self.assertFalse(p["software_transfer"]["real_hardware_validation"])
         self.assertEqual(sum(p["migration_state"]=="TARGET_PLAN_INTEGRATED" for p in entries),2)
         p05=next(p for p in entries if p["id"]=="MSC-AFFECT-P05")
         self.assertEqual(p05["target_path"],"papers/affect/MSC-AFFECT-P05/plan.md")
