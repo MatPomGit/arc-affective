@@ -1,5 +1,7 @@
 # ARC Affective — Multimodal Affective and Cognitive State Computing
 
+> **Migracja portfolio (21.11.2026):** przypisanie MSC-AFFECT-P01–P08 do programów ARC jest opisane w [manifeście](migration/affective_to_arc.json). Dwa plany P05/P07 przekazano do otwartych PR w ARC Neuro i ARC Robo; sześć planów AI oraz kod P01/P08 pozostają tutaj do czasu utworzenia docelowego `arc-ai` i przejścia testów. Repozytorium zachowuje historię, kod i wyniki audytów; nie jest jeszcze archiwum.
+
 **Synapse research project:** [syn78760374](https://www.synapse.org/Synapse:syn78760374) · ID: `syn78760374`. This reference does not verify data access or content.
 
 Engineering research programme on **affective and cognitive state monitoring**, uncertainty-aware multimodal sensing, adaptive games, human–computer interaction and safe robot control.

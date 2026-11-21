@@ -12,6 +12,8 @@ on:
       - "tests/test_public_pages_policy.py"
       - "reports/**"
       - "manuscripts/**"
+      - "migration/**"
+      - "tests/test_migration.py"
       - "mkdocs.yml"
       - "requirements-docs.txt"
       - "scripts/sync_mkdocs.py"
@@ -58,6 +60,8 @@ on:
       - "tests/test_public_pages_policy.py"
       - "reports/**"
       - "manuscripts/**"
+      - "migration/**"
+      - "tests/test_migration.py"
       - "mkdocs.yml"
       - "requirements-docs.txt"
       - "scripts/sync_mkdocs.py"
@@ -125,6 +129,8 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_docs.py' -v
       - name: Validate IEEE manuscript sources (offline)
         run: python -m unittest discover -s tests -p test_manuscripts.py -v
+      - name: Verify exact Git blob provenance for ARC migration
+        run: python -m unittest discover -s tests -p test_migration.py -v
       - name: Validate P08 synthetic benchmark invariants
         run: python -m unittest discover -s tests -p test_p08_benchmark.py -v
       - name: Validate P01 EEG metadata manifest gate

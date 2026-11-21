@@ -1,5 +1,7 @@
 # ARC Affective — source manuscripts (working drafts)
 
+> **Przekazanie naukowe:** katalog pozostaje historycznym źródłem ośmiu planów. [Manifest migracji](../migration/affective_to_arc.json) wskazuje nowe programy: P05 → ARC Neuro, P07 → ARC Robo, P01–P04/P06/P08 → ARC AI (repozytorium docelowe jeszcze nie istnieje). Wcześniejsze wpisy, pracujące źródła IEEEtran P01/P08 i ich testy **nie zostały usunięte ani oznaczone jako gotowe do przeniesienia**. Dokumentację i GitHub Issues pozostawia się jako historię pod przypiętym SHA.
+
 Version 0.1.1 · 2026-11-19. Manuscript source is English, IEEEtran LaTeX, with independent section files and a paper-specific bibliography. **These are working scientific drafts**, not completed journal submissions or empirical studies. Placeholder sections explicitly mark absent evidence.
 
 - [P01](P01/main.tex) ([plan](P01/plan.md), [candidate protocol](P01/protocol.md)): low-channel EEG, montage/reference and corpus shift. Data rights, EEG preprocessing and grouped baselines still pending; no EEG recording from the unverified Muse research interface.
