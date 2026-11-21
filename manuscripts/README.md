@@ -1,6 +1,6 @@
 # ARC Affective — source manuscripts (working drafts)
 
-> **Przekazanie naukowe:** katalog pozostaje historycznym źródłem ośmiu planów. [Manifest migracji](../migration/affective_to_arc.json) wskazuje nowe programy: P05 → ARC Neuro, P07 → ARC Robo, P01–P04/P06/P08 → ARC AI (repozytorium docelowe jeszcze nie istnieje). Wcześniejsze wpisy, pracujące źródła IEEEtran P01/P08 i ich testy **nie zostały usunięte ani oznaczone jako gotowe do przeniesienia**. Dokumentację i GitHub Issues pozostawia się jako historię pod przypiętym SHA.
+> **Przekazanie naukowe:** katalog pozostaje historycznym źródłem ośmiu planów. [Manifest migracji](../migration/affective_to_arc.json) wskazuje nowe programy: P05 → ARC Neuro, P07 → ARC Robo, P01–P04/P06/P08 → [ARC AI](https://github.com/MatPomGit/arc-ai/tree/main/manuscripts). Materiały manuskryptowe znajdują się już w repozytorium docelowym, a historyczne źródła IEEEtran P01/P08 i ich testy nadal pozostają w ARC Affective; migracja kodu wykonawczego nie została zakończona. Dokumentację i GitHub Issues pozostawia się jako historię pod przypiętym SHA.
 
 Version 0.1.1 · 2026-11-19. Manuscript source is English, IEEEtran LaTeX, with independent section files and a paper-specific bibliography. **These are working scientific drafts**, not completed journal submissions or empirical studies. Placeholder sections explicitly mark absent evidence.
 
