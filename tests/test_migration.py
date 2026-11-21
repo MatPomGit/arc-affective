@@ -29,16 +29,17 @@ class MigrationContractTest(unittest.TestCase):
                     self.assertEqual(git_blob_sha(actual),p["blob_sha"])
         for p in DATA["software_inventory"]:
             self.assertEqual(git_blob_sha((ROOT/p["path"]).read_bytes()),p["blob_sha"])
-    def test_six_ai_blockers_and_two_prs(self):
+    def test_six_ai_manuscript_handoffs_and_two_integrated_plans(self):
         entries=DATA["papers"]
-        self.assertEqual(sum(p["migration_state"]=="BLOCKED_TARGET_REPOSITORY_ABSENT" for p in entries),6)
-        self.assertEqual(sum(p["migration_state"]=="STAGED_IN_OPEN_PR" for p in entries),2)
+        self.assertEqual(sum(p["migration_state"]=="TARGET_MANUSCRIPT_INTEGRATED_CODE_PENDING" for p in entries),6)
+        self.assertEqual(sum(p["migration_state"]=="TARGET_PLAN_INTEGRATED" for p in entries),2)
         p05=next(p for p in entries if p["id"]=="MSC-AFFECT-P05")
         self.assertEqual(p05["target_path"],"papers/affect/MSC-AFFECT-P05/plan.md")
         for p in entries:
             if p["target_pr"]:
                 self.assertTrue(p["target_pr"].startswith("https://github.com/MatPomGit/"))
                 self.assertRegex(p["target_pr_head_sha"],r"^[0-9a-f]{40}$")
+                self.assertRegex(p["target_merge_sha"],r"^[0-9a-f]{40}$")
         self.assertTrue((ROOT/"pages/index.md").exists())
 if __name__=="__main__":
     unittest.main()
